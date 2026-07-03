@@ -111,6 +111,9 @@ body {
   mix-blend-mode: screen;
 }
 
+/* Keep container fully opaque so blend mode works (opacity on parent = visible square on mobile) */
+.logo-3d-bg { opacity: 1 !important; }
+
 @media (max-width: 1024px) {
   .logo-3d-bg {
     width: min(380px, 54vw);
@@ -122,17 +125,17 @@ body {
 
 @media (max-width: 768px) {
   .logo-3d-bg {
-    width: min(290px, 74vw);
-    height: min(290px, 74vw);
-    top: 38%;
+    width: min(400px, 96vw);
+    height: min(400px, 96vw);
+    top: 40%;
   }
 }
 
 @media (max-width: 480px) {
   .logo-3d-bg {
-    width: min(230px, 70vw);
-    height: min(230px, 70vw);
-    top: 34%;
+    width: min(340px, 94vw);
+    height: min(340px, 94vw);
+    top: 38%;
   }
 }
 
@@ -1897,7 +1900,14 @@ img { max-width: 100%; display: block; }
   .nav-links { display: none; }
   .nav-cta { display: none; }
   .nav-actions .nav-cta { display: none; }
-  .nav-actions { gap: 8px; }
+  .nav-container {
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  .nav-actions {
+    margin-left: auto;
+    gap: 6px;
+  }
   .navbar .nav-tools { padding: 4px; }
   .navbar .nav-tool-btn,
   .navbar .lang-summary { height: 32px; min-height: 32px; padding: 0 10px; }

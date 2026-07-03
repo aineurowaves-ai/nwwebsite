@@ -118,8 +118,8 @@
 
   function getLogoConfig() {
     const w = window.innerWidth;
-    if (w <= 480) return { startX: 50, endX: 50, startScale: 0.5, endScale: 0.42 };
-    if (w <= 768) return { startX: 50, endX: 50.5, startScale: 0.62, endScale: 0.48 };
+    if (w <= 480) return { startX: 50, endX: 50, startScale: 0.78, endScale: 0.68 };
+    if (w <= 768) return { startX: 50, endX: 50.5, startScale: 0.88, endScale: 0.75 };
     if (w <= 1024) return { startX: 55, endX: 50.5, startScale: 0.78, endScale: 0.55 };
     return { startX: 75, endX: 50.5, startScale: 1, endScale: 0.7 };
   }
@@ -127,12 +127,12 @@
   function getBaseOpacity() {
     const w = window.innerWidth;
     if (isInnerPage) {
-      if (w <= 768) return 0.2;
+      if (w <= 768) return 0.35;
       if (w <= 1024) return 0.28;
       return 0.42;
     }
-    if (w <= 480) return 0.32;
-    if (w <= 768) return 0.4;
+    if (w <= 480) return 0.88;
+    if (w <= 768) return 0.92;
     if (w <= 1024) return 0.5;
     return 1;
   }
@@ -143,10 +143,11 @@
     const eased = easeInOutSine(progress);
     const currentX = startX + (endX - startX) * eased;
     const currentScale = startScale + (endScale - startScale) * eased;
+    const fade = getBaseOpacity() * (1 - eased * 0.25);
 
     logoInner.style.transform = `translate(-50%, -50%) scale(${currentScale})`;
+    logoInner.style.opacity = String(fade);
     logo3d.style.left = currentX + '%';
-    logo3d.style.opacity = getBaseOpacity() * (1 - eased * 0.3);
   }
 
   window.addEventListener('scroll', () => {
