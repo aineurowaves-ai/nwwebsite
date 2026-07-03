@@ -153,13 +153,16 @@ body {
   .logo-3d-bg {
     width: min(400px, 96vw);
     height: min(400px, 96vw);
-    top: 40%;
+    top: 50%;
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
   }
   .logo-3d-inner .logo-video {
     mix-blend-mode: normal;
     -webkit-mix-blend-mode: normal;
+  }
+  .logo-3d-inner.is-canvas-active .logo-video {
+    visibility: hidden;
   }
   .logo-3d-inner .logo-fallback {
     display: none !important;
@@ -173,7 +176,7 @@ body {
   .logo-3d-bg {
     width: min(340px, 94vw);
     height: min(340px, 94vw);
-    top: 38%;
+    top: 50%;
   }
 }
 
@@ -1977,6 +1980,17 @@ img { max-width: 100%; display: block; }
     min-height: 92dvh;
     padding: var(--nav-h) 16px 28px;
     justify-content: center;
+  }
+  /* Home hero (mobile only): text higher, room for logo below */
+  #hero.hero:not(.page-hero) {
+    min-height: 100dvh;
+    padding: calc(var(--nav-h) + 2px) 16px 34vh;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  #hero.hero:not(.page-hero) .hero-content {
+    margin-top: 0;
+    width: 100%;
   }
   .hero.page-hero {
     padding: calc(var(--nav-h) + 20px) 16px 24px;
