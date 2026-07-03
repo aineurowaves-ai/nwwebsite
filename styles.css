@@ -1892,7 +1892,6 @@ img { max-width: 100%; display: block; }
   .integration-visual { order: -1; }
   .industry-grid { grid-template-columns: repeat(2, 1fr); }
   .usecase-grid { grid-template-columns: repeat(2, 1fr); }
-  .blog-grid { grid-template-columns: repeat(2, 1fr); }
   .services-grid { grid-template-columns: 1fr; }
   .process-steps { grid-template-columns: 1fr; }
   .process-steps::before { display: none; }
@@ -1995,10 +1994,6 @@ img { max-width: 100%; display: block; }
   .blog-article-cover { margin-bottom: 28px; }
   .audit-cta .btn-lg { min-width: 0; width: 100%; max-width: 320px; }
   .case-detail-cover { height: auto; aspect-ratio: 16 / 9; }
-}
-
-@media (max-width: 640px) {
-  .blog-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
@@ -2131,6 +2126,31 @@ img { max-width: 100%; display: block; }
 .blog-card .btn {
   margin-top: 18px;
   align-self: flex-start;
+}
+
+@media (max-width: 1024px) {
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .blog-card-img {
+    height: min(220px, 52vw);
+  }
+  .blog-card-body {
+    padding: 20px;
+  }
+  .blog-card h3 {
+    font-size: 1.05rem;
+  }
+  .blog-card .btn {
+    align-self: stretch;
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ============ BLOG ARTICLE ============ */
