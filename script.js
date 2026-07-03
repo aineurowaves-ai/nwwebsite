@@ -127,6 +127,7 @@
   const heroHeight = () => window.innerHeight;
   const isMobile = () => window.innerWidth <= 768;
   const isHomeMobileLayout = () => !isInnerPage && window.innerWidth <= 1024;
+  const useLogoCanvas = () => isMobile() || isHomeMobileLayout();
 
   function easeInOutSine(x) { return -(Math.cos(Math.PI * x) - 1) / 2; }
 
@@ -146,7 +147,7 @@
   }
 
   function syncMobileLogoSource() {
-    if (!logoVideo || !isMobile()) return;
+    if (!logoVideo || !useLogoCanvas()) return;
     const want = isLightTheme() ? LOGO_VIDEO_LIGHT : LOGO_VIDEO_DARK;
     if (!logoVideo.src.includes(want)) {
       logoVideo.src = want;
@@ -234,7 +235,6 @@
       keyPureBlackMatte(imageData);
       canvasCtx.putImageData(imageData, 0, 0);
     }
-    /* Dark theme: raw frame only — unchanged, black matte matches page background */
 
     if (logoVideo.paused && !document.hidden) tryPlay();
   }
@@ -245,14 +245,14 @@
 
     if (typeof logoVideo.requestVideoFrameCallback === 'function') {
       const step = () => {
-        if (!isMobile() || !canvas) return;
+        if (!useLogoCanvas() || !canvas) return;
         drawLogoFrame();
         videoFrameCb = logoVideo.requestVideoFrameCallback(step);
       };
       videoFrameCb = logoVideo.requestVideoFrameCallback(step);
     } else {
       const loop = () => {
-        if (!isMobile() || !canvas) return;
+        if (!useLogoCanvas() || !canvas) return;
         drawLogoFrame();
         rafId = requestAnimationFrame(loop);
       };
@@ -261,7 +261,7 @@
   }
 
   function setupMobileCanvas() {
-    if (!isMobile() || !logoVideo) {
+    if (!useLogoCanvas() || !logoVideo) {
       removeMobileCanvas();
       return;
     }
@@ -275,7 +275,7 @@
       canvas.className = 'logo-canvas';
       canvas.setAttribute('aria-hidden', 'true');
       logoInner.appendChild(canvas);
-      canvasCtx = canvas.getContext('2d', { alpha: true, willReadFrequently: true });
+      canvasCtx = canvas.getContext('2d', { alpha: true });
     }
 
     resizeCanvas();
