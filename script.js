@@ -1,3 +1,4 @@
+/* Neurowaves site — build 2026-07-03-v71 */
 /* ============ STARFIELD BACKGROUND — ORBIT AROUND LOGO ============ */
 (function () {
   const canvas = document.getElementById('stars-canvas');
