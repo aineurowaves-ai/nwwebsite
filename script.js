@@ -110,11 +110,47 @@
   const logoInner = document.getElementById('logo-3d-inner');
   if (!logo3d || !logoInner) return;
 
+  const heroEl = document.querySelector('.hero:not(.page-hero)') || document.querySelector('.hero');
   const isInnerPage = !!document.querySelector('.hero.page-hero');
+  const logoVideo = logoInner.querySelector('.logo-video');
+  const logoFallback = logoInner.querySelector('.logo-fallback');
   let scrollY = 0;
   const heroHeight = () => window.innerHeight;
 
   function easeInOutSine(x) { return -(Math.cos(Math.PI * x) - 1) / 2; }
+
+  function ensureLogoVideo() {
+    if (!logoVideo) return;
+    logoVideo.muted = true;
+    logoVideo.playsInline = true;
+    logoVideo.setAttribute('playsinline', '');
+    logoVideo.setAttribute('webkit-playsinline', '');
+    logoVideo.preload = 'auto';
+
+    const onPlaying = () => {
+      logoInner.classList.add('is-video-active');
+      if (logoFallback) logoFallback.style.display = 'none';
+    };
+
+    const tryPlay = () => {
+      const p = logoVideo.play();
+      if (p && typeof p.then === 'function') {
+        p.then(onPlaying).catch(() => {});
+      }
+    };
+
+    logoVideo.addEventListener('playing', onPlaying);
+    logoVideo.addEventListener('loadeddata', tryPlay, { once: true });
+    if (logoVideo.readyState >= 2) tryPlay();
+    else tryPlay();
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) tryPlay();
+    });
+    document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
+  }
+
+  ensureLogoVideo();
 
   function getLogoConfig() {
     const w = window.innerWidth;
@@ -127,40 +163,46 @@
   function getBaseOpacity() {
     const w = window.innerWidth;
     if (isInnerPage) {
-      if (w <= 768) return 0.35;
+      if (w <= 768) return 0.5;
       if (w <= 1024) return 0.28;
       return 0.42;
     }
-    if (w <= 480) return 0.88;
-    if (w <= 768) return 0.92;
+    if (w <= 480) return 0.95;
+    if (w <= 768) return 1;
     if (w <= 1024) return 0.5;
     return 1;
+  }
+
+  function isPastHeroOnMobile() {
+    if (window.innerWidth > 768) return false;
+    if (heroEl) {
+      const rect = heroEl.getBoundingClientRect();
+      return rect.bottom < window.innerHeight * 0.2;
+    }
+    return scrollY > heroHeight() * 0.85;
   }
 
   function updateLogo() {
     const w = window.innerWidth;
     const isMobile = w <= 768;
-    const vh = heroHeight();
-    const progress = Math.min(scrollY / (vh * 1.2), 1);
+    const progress = Math.min(scrollY / (heroHeight() * 1.2), 1);
     const eased = easeInOutSine(progress);
     const { startX, endX, startScale, endScale } = getLogoConfig();
     const currentX = startX + (endX - startX) * eased;
     const currentScale = startScale + (endScale - startScale) * eased;
 
-    /* Past hero on mobile — fixed logo must not float over white sections */
-    if (isMobile && scrollY > vh * 0.55) {
+    if (isPastHeroOnMobile()) {
       logo3d.style.visibility = 'hidden';
       logo3d.style.opacity = '0';
       return;
     }
 
     logo3d.style.visibility = 'visible';
-    const fade = getBaseOpacity() * (1 - eased * 0.25);
+    logo3d.style.opacity = '1';
+    const fade = getBaseOpacity() * (1 - eased * 0.2);
 
     logoInner.style.transform = `translate(-50%, -50%) scale(${currentScale})`;
-    /* Opacity on video layer breaks blend mode → visible square on mobile Safari */
     logoInner.style.opacity = isMobile ? '1' : String(fade);
-    logo3d.style.opacity = isMobile ? '1' : '';
     logo3d.style.left = currentX + '%';
   }
 

@@ -106,19 +106,19 @@ body {
   display: none;
 }
 
-/* Light: WebM matte is black — screen on wrapper (not video) for iOS Safari */
-[data-theme="light"] .logo-3d-bg {
+/* Light: WebM matte is black — screen on video removes the square matte */
+[data-theme="light"] .logo-3d-inner .logo-video {
   mix-blend-mode: screen;
   -webkit-mix-blend-mode: screen;
-}
-[data-theme="light"] .logo-3d-inner .logo-video {
-  mix-blend-mode: normal;
-  -webkit-mix-blend-mode: normal;
   background: transparent;
 }
 
 .logo-3d-inner .logo-video {
   background: transparent;
+}
+
+.logo-3d-inner.is-video-active .logo-fallback {
+  display: none !important;
 }
 
 @media (max-width: 1024px) {
@@ -138,10 +138,13 @@ body {
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
   }
-  /* iOS: blend on fixed layer; inner must stay fully opaque */
-  [data-theme="light"] .logo-3d-bg {
+  /* iOS: screen on video (not container); keeps purple logo, drops black matte */
+  .logo-3d-inner .logo-video {
     mix-blend-mode: screen;
     -webkit-mix-blend-mode: screen;
+  }
+  .logo-3d-inner .logo-fallback {
+    display: none !important;
   }
   .logo-3d-inner {
     opacity: 1 !important;
