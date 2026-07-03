@@ -419,6 +419,13 @@ img { max-width: 100%; display: block; }
 .navbar .theme-toggle .icon-moon { display: block; }
 [data-theme="light"] .navbar .theme-toggle .icon-sun { display: block; }
 [data-theme="light"] .navbar .theme-toggle .icon-moon { display: none; }
+.navbar .theme-toggle .icon-sun circle { fill: currentColor; }
+.navbar .theme-toggle .icon-sun path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
 
 .navbar .lang-details {
   position: relative;
