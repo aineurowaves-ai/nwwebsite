@@ -185,12 +185,34 @@
     }
   }
 
+  function keyBlackMatte(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+      const max = Math.max(r, g, b);
+      const chroma = max - Math.min(r, g, b);
+
+      /* Only pure black / gray matte — keep dark saturated purple logo edges */
+      if (max <= 18) {
+        d[i + 3] = 0;
+      } else if (max <= 52 && chroma <= 24) {
+        const t = (max - 18) / 34;
+        d[i + 3] = Math.round(d[i + 3] * Math.max(0, Math.min(1, t)));
+      }
+    }
+  }
+
   function drawLogoFrame() {
     if (!canvasCtx || !logoVideo || logoVideo.readyState < 2) return;
     const w = canvas.width;
     const h = canvas.height;
     canvasCtx.clearRect(0, 0, w, h);
     canvasCtx.drawImage(logoVideo, 0, 0, w, h);
+    const imageData = canvasCtx.getImageData(0, 0, w, h);
+    keyBlackMatte(imageData);
+    canvasCtx.putImageData(imageData, 0, 0);
     if (logoVideo.paused && !document.hidden) tryPlay();
   }
 
@@ -229,7 +251,7 @@
       canvas.className = 'logo-canvas';
       canvas.setAttribute('aria-hidden', 'true');
       logoInner.appendChild(canvas);
-      canvasCtx = canvas.getContext('2d', { alpha: true });
+      canvasCtx = canvas.getContext('2d', { alpha: true, willReadFrequently: true });
     }
 
     resizeCanvas();
