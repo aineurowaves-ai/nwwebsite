@@ -115,7 +115,6 @@
   const logoVideo = logoInner.querySelector('.logo-video');
   const logoFallback = logoInner.querySelector('.logo-fallback');
   let scrollY = 0;
-  let mobileStartTop = 76;
   let canvas = null;
   let canvasCtx = null;
   let rafId = 0;
@@ -123,14 +122,8 @@
 
   const heroHeight = () => window.innerHeight;
   const isMobile = () => window.innerWidth <= 768;
-  const isHomeMobileLayout = () => !isInnerPage && window.innerWidth <= 1024;
-  const useLogoCanvas = () => isMobile() || isHomeMobileLayout();
 
   function easeInOutSine(x) { return -(Math.cos(Math.PI * x) - 1) / 2; }
-
-  function setHomeMobileLogoClass(active) {
-    logo3d.classList.toggle('is-home-mobile', !!active);
-  }
 
   function hideFallback() {
     logoInner.classList.add('is-video-active');
@@ -198,7 +191,8 @@
     const h = canvas.height;
     canvasCtx.clearRect(0, 0, w, h);
     canvasCtx.drawImage(logoVideo, 0, 0, w, h);
-    /* No pixel keying — matte handled by CSS screen blend on canvas (light + home dark) */
+    /* Dark: black matte matches page — no pixel keying.
+       Light: mix-blend-mode screen on canvas (same as desktop video). */
     if (logoVideo.paused && !document.hidden) tryPlay();
   }
 
@@ -208,14 +202,14 @@
 
     if (typeof logoVideo.requestVideoFrameCallback === 'function') {
       const step = () => {
-        if (!useLogoCanvas() || !canvas) return;
+        if (!isMobile() || !canvas) return;
         drawLogoFrame();
         videoFrameCb = logoVideo.requestVideoFrameCallback(step);
       };
       videoFrameCb = logoVideo.requestVideoFrameCallback(step);
     } else {
       const loop = () => {
-        if (!useLogoCanvas() || !canvas) return;
+        if (!isMobile() || !canvas) return;
         drawLogoFrame();
         rafId = requestAnimationFrame(loop);
       };
@@ -224,7 +218,7 @@
   }
 
   function setupMobileCanvas() {
-    if (!useLogoCanvas() || !logoVideo) {
+    if (!isMobile() || !logoVideo) {
       removeMobileCanvas();
       return;
     }
@@ -242,29 +236,6 @@
 
     resizeCanvas();
     startCanvasLoop();
-  }
-
-  function recalcMobileStartTop() {
-    if (!isHomeMobileLayout() || !heroEl) return;
-    const content = heroEl.querySelector('.hero-content');
-    const w = window.innerWidth;
-    const startScale = w <= 480 ? 0.7 : 0.8;
-    const logoSize = logo3d.offsetWidth || (w <= 480 ? 340 : 400);
-    const logoHalf = (logoSize * startScale) / 2;
-    const gap = 28;
-    if (content) {
-      const bottom = content.getBoundingClientRect().bottom;
-      mobileStartTop = ((bottom + gap + logoHalf) / window.innerHeight) * 100;
-      mobileStartTop = Math.min(Math.max(mobileStartTop, 68), 88);
-    } else {
-      mobileStartTop = 80;
-    }
-  }
-
-  function getHomeMobileScrollProgress() {
-    if (!heroEl) return 1;
-    const range = Math.max(heroEl.offsetHeight - window.innerHeight * 0.15, window.innerHeight * 0.55);
-    return Math.min(scrollY / range, 1);
   }
 
   function getLogoConfig() {
@@ -288,28 +259,6 @@
 
   function updateLogo() {
     const mobile = isMobile();
-    const w = window.innerWidth;
-
-    if (isHomeMobileLayout()) {
-      setHomeMobileLogoClass(true);
-      if (scrollY < 2) recalcMobileStartTop();
-      const eased = easeInOutSine(getHomeMobileScrollProgress());
-      const startScale = w <= 480 ? 0.7 : 0.8;
-      const endScale = w <= 480 ? 0.66 : 0.74;
-      const currentTop = mobileStartTop + (50 - mobileStartTop) * eased;
-      const currentScale = startScale + (endScale - startScale) * eased;
-
-      logo3d.style.display = '';
-      logo3d.style.visibility = 'visible';
-      logo3d.style.top = currentTop + '%';
-      logo3d.style.left = '50%';
-      logo3d.style.opacity = '1';
-      logoInner.style.opacity = '1';
-      logoInner.style.transform = `translate(-50%, -50%) scale(${currentScale})`;
-      return;
-    }
-
-    setHomeMobileLogoClass(false);
     const progress = Math.min(scrollY / (heroHeight() * 1.2), 1);
     const eased = easeInOutSine(progress);
     const { startX, endX, startScale, endScale } = getLogoConfig();
@@ -319,22 +268,15 @@
 
     logo3d.style.display = '';
     logo3d.style.visibility = 'visible';
-
+    logo3d.style.top = '';
     logoInner.style.transform = `translate(-50%, -50%) scale(${currentScale})`;
     logoInner.style.opacity = mobile ? '1' : String(fade);
     logo3d.style.opacity = mobile ? '1' : String(fade);
-    if (mobile) {
-      logo3d.style.top = '50%';
-      logo3d.style.left = '50%';
-    } else {
-      logo3d.style.left = currentX + '%';
-    }
+    logo3d.style.left = currentX + '%';
   }
 
   ensureLogoVideo();
   setupMobileCanvas();
-  setHomeMobileLogoClass(isHomeMobileLayout());
-  recalcMobileStartTop();
 
   window.addEventListener('scroll', () => {
     scrollY = window.scrollY;
@@ -342,29 +284,12 @@
   }, { passive: true });
 
   window.addEventListener('resize', () => {
-    setHomeMobileLogoClass(isHomeMobileLayout());
-    recalcMobileStartTop();
     setupMobileCanvas();
     resizeCanvas();
     requestAnimationFrame(updateLogo);
   });
 
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => {
-      recalcMobileStartTop();
-      requestAnimationFrame(updateLogo);
-    });
-  }
-
-  window.addEventListener('load', () => {
-    recalcMobileStartTop();
-    requestAnimationFrame(updateLogo);
-  });
-
-  requestAnimationFrame(() => {
-    recalcMobileStartTop();
-    updateLogo();
-  });
+  updateLogo();
 })();
 
 /* ============ SUBTLE MOUSE PARALLAX ON LOGO ============ */
