@@ -185,23 +185,8 @@
     }
   }
 
-  function keyBlackMatte(imageData) {
-    const d = imageData.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const r = d[i];
-      const g = d[i + 1];
-      const b = d[i + 2];
-      const max = Math.max(r, g, b);
-      const chroma = max - Math.min(r, g, b);
-
-      /* Only pure black / gray matte — keep dark saturated purple logo edges */
-      if (max <= 18) {
-        d[i + 3] = 0;
-      } else if (max <= 52 && chroma <= 24) {
-        const t = (max - 18) / 34;
-        d[i + 3] = Math.round(d[i + 3] * Math.max(0, Math.min(1, t)));
-      }
-    }
+  function isLightTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'light';
   }
 
   function drawLogoFrame() {
@@ -210,9 +195,8 @@
     const h = canvas.height;
     canvasCtx.clearRect(0, 0, w, h);
     canvasCtx.drawImage(logoVideo, 0, 0, w, h);
-    const imageData = canvasCtx.getImageData(0, 0, w, h);
-    keyBlackMatte(imageData);
-    canvasCtx.putImageData(imageData, 0, 0);
+    /* Dark: black matte matches page — no pixel keying (avoids holes on light theme).
+       Light: mix-blend-mode screen on canvas (same as desktop video). */
     if (logoVideo.paused && !document.hidden) tryPlay();
   }
 
@@ -251,7 +235,7 @@
       canvas.className = 'logo-canvas';
       canvas.setAttribute('aria-hidden', 'true');
       logoInner.appendChild(canvas);
-      canvasCtx = canvas.getContext('2d', { alpha: true, willReadFrequently: true });
+      canvasCtx = canvas.getContext('2d', { alpha: true });
     }
 
     resizeCanvas();
