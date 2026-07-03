@@ -524,7 +524,8 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(
   '.service-card, .solution-card, .pain-card, .usecase-card, .integration-card, ' +
-  '.case-card-link, .academy-card, .process-step, .stat-item, .industry-card, .mini-card, .positioning-grid .mini-card'
+  '.case-card-link, .academy-card, .process-step, .stat-item, .industry-card, .mini-card, .positioning-grid .mini-card, ' +
+  '.contact-team-card'
 ).forEach((el) => {
   el.classList.add('fade-in');
   observer.observe(el);
