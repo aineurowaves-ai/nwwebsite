@@ -140,12 +140,6 @@ body {
   background: transparent;
 }
 
-/* Light mobile: same as desktop video — screen removes black matte */
-[data-theme="light"] .logo-canvas {
-  mix-blend-mode: screen;
-  -webkit-mix-blend-mode: screen;
-}
-
 @media (max-width: 1024px) {
   .logo-3d-bg {
     width: min(380px, 54vw);

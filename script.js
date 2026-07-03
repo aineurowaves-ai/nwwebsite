@@ -120,10 +120,17 @@
   let rafId = 0;
   let videoFrameCb = null;
 
+  const LOGO_VIDEO_DARK = 'assets/logo-3d.webm';
+  const LOGO_VIDEO_LIGHT = 'assets/logo-3d-light.webm';
+
   const heroHeight = () => window.innerHeight;
   const isMobile = () => window.innerWidth <= 768;
 
   function easeInOutSine(x) { return -(Math.cos(Math.PI * x) - 1) / 2; }
+
+  function isLightTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'light';
+  }
 
   function hideFallback() {
     logoInner.classList.add('is-video-active');
@@ -136,6 +143,16 @@
     if (p && typeof p.then === 'function') p.then(hideFallback).catch(() => {});
   }
 
+  function syncMobileLogoSource() {
+    if (!logoVideo || !isMobile()) return;
+    const want = isLightTheme() ? LOGO_VIDEO_LIGHT : LOGO_VIDEO_DARK;
+    if (!logoVideo.src.includes(want)) {
+      logoVideo.src = want;
+      logoVideo.load();
+      logoVideo.addEventListener('loadeddata', tryPlay, { once: true });
+    }
+  }
+
   function ensureLogoVideo() {
     if (!logoVideo) return;
     logoVideo.muted = true;
@@ -146,6 +163,7 @@
     logoVideo.loop = true;
 
     logoVideo.addEventListener('playing', hideFallback);
+    syncMobileLogoSource();
     logoVideo.addEventListener('loadeddata', tryPlay, { once: true });
     tryPlay();
 
@@ -153,6 +171,10 @@
       if (!document.hidden) tryPlay();
     });
     document.addEventListener('touchstart', tryPlay, { passive: true });
+
+    new MutationObserver(() => {
+      syncMobileLogoSource();
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   }
 
   function stopCanvasLoop() {
@@ -185,14 +207,33 @@
     }
   }
 
+  function keyPureBlackMatte(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+      /* Light theme only: remove matte pixels — never gray logo shadows (colored pixels kept) */
+      if (r <= 16 && g <= 16 && b <= 16) {
+        d[i + 3] = 0;
+      }
+    }
+  }
+
   function drawLogoFrame() {
     if (!canvasCtx || !logoVideo || logoVideo.readyState < 2) return;
     const w = canvas.width;
     const h = canvas.height;
     canvasCtx.clearRect(0, 0, w, h);
     canvasCtx.drawImage(logoVideo, 0, 0, w, h);
-    /* Dark: black matte matches page — no pixel keying.
-       Light: mix-blend-mode screen on canvas (same as desktop video). */
+
+    if (isLightTheme()) {
+      const imageData = canvasCtx.getImageData(0, 0, w, h);
+      keyPureBlackMatte(imageData);
+      canvasCtx.putImageData(imageData, 0, 0);
+    }
+    /* Dark theme: raw frame only — unchanged, black matte matches page background */
+
     if (logoVideo.paused && !document.hidden) tryPlay();
   }
 
@@ -225,13 +266,14 @@
 
     logoVideo.classList.add('logo-video--source');
     hideFallback();
+    syncMobileLogoSource();
 
     if (!canvas) {
       canvas = document.createElement('canvas');
       canvas.className = 'logo-canvas';
       canvas.setAttribute('aria-hidden', 'true');
       logoInner.appendChild(canvas);
-      canvasCtx = canvas.getContext('2d', { alpha: true });
+      canvasCtx = canvas.getContext('2d', { alpha: true, willReadFrequently: true });
     }
 
     resizeCanvas();
@@ -268,7 +310,7 @@
 
     logo3d.style.display = '';
     logo3d.style.visibility = 'visible';
-    logo3d.style.top = '';
+
     logoInner.style.transform = `translate(-50%, -50%) scale(${currentScale})`;
     logoInner.style.opacity = mobile ? '1' : String(fade);
     logo3d.style.opacity = mobile ? '1' : String(fade);
