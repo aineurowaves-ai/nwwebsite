@@ -183,7 +183,7 @@
     }
   }
 
-  function chromaKeyFrame() {
+  function drawLogoFrame() {
     if (!canvasCtx || !logoVideo || logoVideo.readyState < 2) return;
     const w = canvas.width;
     const h = canvas.height;
@@ -192,7 +192,8 @@
     const imageData = canvasCtx.getImageData(0, 0, w, h);
     const d = imageData.data;
     for (let i = 0; i < d.length; i += 4) {
-      if (d[i] < 50 && d[i + 1] < 50 && d[i + 2] < 50) d[i + 3] = 0;
+      const lum = d[i] * 0.299 + d[i + 1] * 0.587 + d[i + 2] * 0.114;
+      if (lum < 92) d[i + 3] = 0;
     }
     canvasCtx.putImageData(imageData, 0, 0);
     if (logoVideo.paused && !document.hidden) tryPlay();
@@ -205,14 +206,14 @@
     if (typeof logoVideo.requestVideoFrameCallback === 'function') {
       const step = () => {
         if (!isMobile() || !canvas) return;
-        chromaKeyFrame();
+        drawLogoFrame();
         videoFrameCb = logoVideo.requestVideoFrameCallback(step);
       };
       videoFrameCb = logoVideo.requestVideoFrameCallback(step);
     } else {
       const loop = () => {
         if (!isMobile() || !canvas) return;
-        chromaKeyFrame();
+        drawLogoFrame();
         rafId = requestAnimationFrame(loop);
       };
       rafId = requestAnimationFrame(loop);
@@ -233,7 +234,7 @@
       canvas.className = 'logo-canvas';
       canvas.setAttribute('aria-hidden', 'true');
       logoInner.appendChild(canvas);
-      canvasCtx = canvas.getContext('2d', { willReadFrequently: true });
+      canvasCtx = canvas.getContext('2d', { alpha: true, willReadFrequently: true });
     }
 
     resizeCanvas();
@@ -259,14 +260,6 @@
     return 1;
   }
 
-  function shouldHideMobileLogo() {
-    if (!isMobile()) return false;
-    const limit = heroEl
-      ? Math.max(heroEl.offsetHeight - 60, heroHeight() * 0.5)
-      : heroHeight() * 0.9;
-    return scrollY > limit;
-  }
-
   function updateLogo() {
     const mobile = isMobile();
     const progress = Math.min(scrollY / (heroHeight() * 1.2), 1);
@@ -274,18 +267,14 @@
     const { startX, endX, startScale, endScale } = getLogoConfig();
     const currentX = startX + (endX - startX) * eased;
     const currentScale = startScale + (endScale - startScale) * eased;
+    const fade = getBaseOpacity() * (1 - eased * 0.2);
 
-    if (shouldHideMobileLogo()) {
-      logo3d.style.display = 'none';
-      return;
-    }
-
-    logo3d.style.display = 'block';
+    logo3d.style.display = '';
     logo3d.style.visibility = 'visible';
-    logo3d.style.opacity = '1';
 
     logoInner.style.transform = `translate(-50%, -50%) scale(${currentScale})`;
-    logoInner.style.opacity = mobile ? '1' : String(getBaseOpacity() * (1 - eased * 0.2));
+    logoInner.style.opacity = mobile ? '1' : String(fade);
+    logo3d.style.opacity = mobile ? '1' : String(fade);
     logo3d.style.left = currentX + '%';
   }
 

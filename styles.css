@@ -137,6 +137,7 @@ body {
   height: 100%;
   display: block;
   pointer-events: none;
+  background: transparent;
 }
 
 @media (max-width: 1024px) {
