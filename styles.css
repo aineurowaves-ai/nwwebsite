@@ -1900,7 +1900,7 @@ img { max-width: 100%; display: block; }
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: 10px;
-  row-gap: 6px;
+  row-gap: 12px;
   align-items: center;
   align-content: start;
   align-self: start;
