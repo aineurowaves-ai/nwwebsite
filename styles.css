@@ -127,15 +127,10 @@ body {
   width: 1px !important;
   height: 1px !important;
   opacity: 0 !important;
-  visibility: hidden !important;
   pointer-events: none !important;
   overflow: hidden !important;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
-}
-
-.logo-3d-inner.is-canvas-active .logo-video {
-  visibility: hidden !important;
 }
 
 .logo-canvas {
@@ -144,6 +139,18 @@ body {
   display: block;
   pointer-events: none;
   background: transparent;
+}
+
+/* Light mobile canvas: screen removes black matte (as before move) */
+[data-theme="light"] .logo-canvas {
+  mix-blend-mode: screen;
+  -webkit-mix-blend-mode: screen;
+}
+
+/* Home mobile dark: screen only when logo sits below hero (offset position) */
+[data-theme="dark"] .logo-3d-bg.is-home-mobile .logo-canvas {
+  mix-blend-mode: screen;
+  -webkit-mix-blend-mode: screen;
 }
 
 @media (max-width: 1024px) {

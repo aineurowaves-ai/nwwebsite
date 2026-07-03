@@ -121,9 +121,6 @@
   let rafId = 0;
   let videoFrameCb = null;
 
-  const LOGO_VIDEO_DARK = 'assets/logo-3d.webm';
-  const LOGO_VIDEO_LIGHT = 'assets/logo-3d-light.webm';
-
   const heroHeight = () => window.innerHeight;
   const isMobile = () => window.innerWidth <= 768;
   const isHomeMobileLayout = () => !isInnerPage && window.innerWidth <= 1024;
@@ -131,8 +128,8 @@
 
   function easeInOutSine(x) { return -(Math.cos(Math.PI * x) - 1) / 2; }
 
-  function isLightTheme() {
-    return document.documentElement.getAttribute('data-theme') === 'light';
+  function setHomeMobileLogoClass(active) {
+    logo3d.classList.toggle('is-home-mobile', !!active);
   }
 
   function hideFallback() {
@@ -146,16 +143,6 @@
     if (p && typeof p.then === 'function') p.then(hideFallback).catch(() => {});
   }
 
-  function syncMobileLogoSource() {
-    if (!logoVideo || !useLogoCanvas()) return;
-    const want = isLightTheme() ? LOGO_VIDEO_LIGHT : LOGO_VIDEO_DARK;
-    if (!logoVideo.src.includes(want)) {
-      logoVideo.src = want;
-      logoVideo.load();
-      logoVideo.addEventListener('loadeddata', tryPlay, { once: true });
-    }
-  }
-
   function ensureLogoVideo() {
     if (!logoVideo) return;
     logoVideo.muted = true;
@@ -166,7 +153,6 @@
     logoVideo.loop = true;
 
     logoVideo.addEventListener('playing', hideFallback);
-    syncMobileLogoSource();
     logoVideo.addEventListener('loadeddata', tryPlay, { once: true });
     tryPlay();
 
@@ -174,10 +160,6 @@
       if (!document.hidden) tryPlay();
     });
     document.addEventListener('touchstart', tryPlay, { passive: true });
-
-    new MutationObserver(() => {
-      syncMobileLogoSource();
-    }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   }
 
   function stopCanvasLoop() {
@@ -197,7 +179,6 @@
       canvasCtx = null;
     }
     if (logoVideo) logoVideo.classList.remove('logo-video--source');
-    logoInner.classList.remove('is-canvas-active');
   }
 
   function resizeCanvas() {
@@ -211,47 +192,13 @@
     }
   }
 
-  function keyPureBlackMatte(imageData) {
-    const d = imageData.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const r = d[i];
-      const g = d[i + 1];
-      const b = d[i + 2];
-      if (r <= 16 && g <= 16 && b <= 16) {
-        d[i + 3] = 0;
-      }
-    }
-  }
-
-  function keyDarkMatte(imageData) {
-    const d = imageData.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const r = d[i];
-      const g = d[i + 1];
-      const b = d[i + 2];
-      const max = Math.max(r, g, b);
-      const spread = max - Math.min(r, g, b);
-      /* Neutral near-black matte only — keep colored logo shadows */
-      if (max <= 18 && spread <= 4) {
-        d[i + 3] = 0;
-      }
-    }
-  }
-
   function drawLogoFrame() {
     if (!canvasCtx || !logoVideo || logoVideo.readyState < 2) return;
     const w = canvas.width;
     const h = canvas.height;
     canvasCtx.clearRect(0, 0, w, h);
     canvasCtx.drawImage(logoVideo, 0, 0, w, h);
-    const imageData = canvasCtx.getImageData(0, 0, w, h);
-    if (isLightTheme()) {
-      keyPureBlackMatte(imageData);
-    } else {
-      keyDarkMatte(imageData);
-    }
-    canvasCtx.putImageData(imageData, 0, 0);
-
+    /* No pixel keying — matte handled by CSS screen blend on canvas (light + home dark) */
     if (logoVideo.paused && !document.hidden) tryPlay();
   }
 
@@ -283,16 +230,14 @@
     }
 
     logoVideo.classList.add('logo-video--source');
-    logoInner.classList.add('is-canvas-active');
     hideFallback();
-    syncMobileLogoSource();
 
     if (!canvas) {
       canvas = document.createElement('canvas');
       canvas.className = 'logo-canvas';
       canvas.setAttribute('aria-hidden', 'true');
       logoInner.appendChild(canvas);
-      canvasCtx = canvas.getContext('2d', { alpha: true, willReadFrequently: true });
+      canvasCtx = canvas.getContext('2d', { alpha: true });
     }
 
     resizeCanvas();
@@ -346,6 +291,7 @@
     const w = window.innerWidth;
 
     if (isHomeMobileLayout()) {
+      setHomeMobileLogoClass(true);
       if (scrollY < 2) recalcMobileStartTop();
       const eased = easeInOutSine(getHomeMobileScrollProgress());
       const startScale = w <= 480 ? 0.7 : 0.8;
@@ -363,6 +309,7 @@
       return;
     }
 
+    setHomeMobileLogoClass(false);
     const progress = Math.min(scrollY / (heroHeight() * 1.2), 1);
     const eased = easeInOutSine(progress);
     const { startX, endX, startScale, endScale } = getLogoConfig();
@@ -386,6 +333,7 @@
 
   ensureLogoVideo();
   setupMobileCanvas();
+  setHomeMobileLogoClass(isHomeMobileLayout());
   recalcMobileStartTop();
 
   window.addEventListener('scroll', () => {
@@ -394,6 +342,7 @@
   }, { passive: true });
 
   window.addEventListener('resize', () => {
+    setHomeMobileLogoClass(isHomeMobileLayout());
     recalcMobileStartTop();
     setupMobileCanvas();
     resizeCanvas();
