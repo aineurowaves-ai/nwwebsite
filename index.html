@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neurowaves — IT, AI, automation &amp; marketing for growing businesses</title>
+  <meta name="description" id="meta-description" content="Neurowaves delivers IT projects, AI implementation, workflow automation, and marketing — wired into one system so your business runs faster and loses fewer leads.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=47">
+  <style>
+    .navbar .nav-tools button,
+    .navbar .nav-tools summary {
+      background: transparent !important;
+      color: #a1a1aa !important;
+      border: none !important;
+      box-shadow: none !important;
+      font-family: Inter, sans-serif !important;
+    }
+    .navbar .lang-details:not([open]) .lang-menu { display: none !important; }
+  </style>
+</head>
+<body>
+  <canvas id="stars-canvas"></canvas>
+  <div id="logo-3d-bg" class="logo-3d-bg">
+    <div class="logo-3d-inner" id="logo-3d-inner">
+      <video class="logo-video" src="assets/logo-3d.webm" autoplay loop muted playsinline></video>
+      <img class="logo-fallback" src="assets/logo-3d.png" alt="" aria-hidden="true" width="520" height="520">
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" aria-label="Neurowaves home">
+        <img src="assets/logo-white.png" alt="Neurowaves" class="logo-img">
+        <span class="logo-text">Neurowaves</span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="services.html" data-i18n="nav.services">Services</a>
+        <a href="cases.html" data-i18n="nav.cases">Cases</a>
+        <a href="blog.html" data-i18n="nav.blog">Blog</a>
+        <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-tools" role="group" aria-label="Site preferences">
+          <details class="lang-details" id="lang-details">
+            <summary class="nav-tool-btn lang-summary" aria-label="Language">
+              <svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="currentColor" d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+              <span class="lang-code" id="lang-current">EN</span>
+              <svg class="lang-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </summary>
+            <div class="lang-menu" id="lang-menu" role="menu">
+              <button type="button" class="lang-option active" data-lang="en">English</button>
+              <button type="button" class="lang-option" data-lang="de">Deutsch</button>
+              <button type="button" class="lang-option" data-lang="fr">Français</button>
+              <button type="button" class="lang-option" data-lang="es">Español</button>
+              <button type="button" class="lang-option" data-lang="uk">Українська</button>
+            </div>
+          </details>
+          <span class="nav-tools-divider" aria-hidden="true"></span>
+          <button type="button" class="nav-tool-btn theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+            <svg class="tool-icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor"/></svg>
+            <svg class="tool-icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="currentColor"/><path fill="currentColor" d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+          </button>
+        </div>
+        <a href="contact.html" class="nav-cta" data-i18n="nav.cta">Let's talk &rarr;</a>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <p class="hero-tag" data-i18n="hero.tag">From weak spots to live systems</p>
+      <h1 class="hero-title">
+        <span class="gradient-text hero-title-line" data-i18n="hero.titleAccent">IT, AI, workflows, and marketing</span>
+        <span class="hero-title-line" data-i18n="hero.titleRest">wired into one system that scales with you.</span>
+      </h1>
+      <p class="hero-desc" data-i18n="hero.desc">
+        Neurowaves delivers IT projects, embeds AI into daily operations, automates any workflow, and runs marketing that brings demand — then connects the pieces so leads, data, and teams stay in sync. Less chaos in the stack. Fewer dropped inquiries. More room to grow.
+      </p>
+      <div class="hero-buttons">
+        <a href="contact.html" class="btn btn-primary" data-i18n="hero.btn1">Contact us &rarr;</a>
+        <a href="services.html" class="btn btn-outline" data-i18n="hero.btn2">View services &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSITIONING -->
+  <section class="section" id="positioning">
+    <div class="container">
+      <p class="section-tag" data-i18n="positioning.tag">WHAT WE DO</p>
+      <h2 class="section-title"><span data-i18n="positioning.title">Five things we do</span><br><span class="gradient-text" data-i18n="positioning.titleAccent">for businesses that grow with technology.</span></h2>
+      <p class="section-desc" data-i18n="positioning.intro">We start with your weak spots — then deliver analysis, data systems, IT projects, marketing, and generative AI that work as one picture, not five separate vendors.</p>
+      <div class="positioning-grid">
+        <div class="mini-card glass">
+          <h4 data-i18n="positioning.c1h">1. Business analysis</h4>
+          <p data-i18n="positioning.c1p">We find weak points in operations, sales, and processes — and show exactly where technology improvements will pay off first.</p>
+        </div>
+        <div class="mini-card glass">
+          <h4 data-i18n="positioning.c2h">2. Data ecosystems</h4>
+          <p data-i18n="positioning.c2p">We build how your business collects, stores, and uses information: CRM pipelines, dashboards, integrations, and custom workflows or apps — so teams work faster and scale with less friction.</p>
+        </div>
+        <div class="mini-card glass">
+          <h4 data-i18n="positioning.c3h">3. IT projects</h4>
+          <p data-i18n="positioning.c3p">Websites and web apps, CRM/ERP setup, AI assistants, API integrations, e-commerce, Telegram bots, internal tools, and industry platforms — scoped, built, and launched.</p>
+        </div>
+        <div class="mini-card glass">
+          <h4 data-i18n="positioning.c4h">4. Marketing &amp; demand</h4>
+          <p data-i18n="positioning.c4p">Targeted and contextual advertising, branding, competitor analysis, and marketing strategy — plus campaigns where AI automation and paid media are planned as one system.</p>
+        </div>
+        <div class="mini-card glass">
+          <h4 data-i18n="positioning.c5h">5. Generative AI for brand</h4>
+          <p data-i18n="positioning.c5p">We train your team and deploy gen AI in marketing: video, images, AI avatars, 3D visuals, and design assets that strengthen your brand — not generic stock filler.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUDIT -->
+  <section class="section section-audit" id="audit">
+    <div class="container">
+      <div class="audit-glass glass">
+        <span class="audit-badge" data-i18n="audit.tag">2-DAY AUDIT</span>
+        <h2 class="audit-title" data-i18n="audit.title">Your business is losing money somewhere — find out where in 48 hours</h2>
+        <p class="audit-desc" data-i18n="audit.desc">We go through the website, forms, chat channels, CRM, team replies, and follow-up habits. You receive ten weak spots, ten fixes to apply right away, and a roadmap for AI/CRM automation.</p>
+        <div class="audit-cta">
+          <div class="audit-price-box">
+            <span class="audit-label" data-i18n="audit.label">Starting from</span>
+            <span class="audit-amount" data-i18n="audit.amount">$300</span>
+          </div>
+          <a href="contact.html" class="btn btn-primary btn-lg" data-i18n="audit.btn">Book my audit &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES / INDUSTRIES -->
+  <section class="section" id="industries">
+    <div class="container">
+      <p class="section-tag" data-i18n="usecases.tag">Industries we work with</p>
+      <h2 class="section-title" data-i18n="usecases.title">Where our services work best</h2>
+      <div class="usecase-grid">
+        <div class="usecase-card glass">
+          <div class="usecase-icon">&#9874;</div>
+          <h4 data-i18n="usecases.u1h">Manufacturing, engineering, B2B</h4>
+          <ul>
+            <li data-i18n="usecases.u1l1">Technical inquiries pre-sorted before a human touches them</li>
+            <li data-i18n="usecases.u1l2">Specs, part numbers, stages, and reminders captured automatically</li>
+            <li data-i18n="usecases.u1l3">Outbound campaigns and control over months-long deals</li>
+          </ul>
+        </div>
+        <div class="usecase-card glass">
+          <div class="usecase-icon">&#128722;</div>
+          <h4 data-i18n="usecases.u2h">Online retail &amp; e-commerce</h4>
+          <ul>
+            <li data-i18n="usecases.u2l1">Product guidance that walks the buyer to checkout</li>
+            <li data-i18n="usecases.u2l2">Order status, gentle reminders, common questions</li>
+            <li data-i18n="usecases.u2l3">A lighter day for the support desk</li>
+          </ul>
+        </div>
+        <div class="usecase-card glass">
+          <div class="usecase-icon">&#128736;</div>
+          <h4 data-i18n="usecases.u3h">Service businesses</h4>
+          <ul>
+            <li data-i18n="usecases.u3l1">Scheduling, screening, dispatching, response-time discipline</li>
+            <li data-i18n="usecases.u3l2">Confirmations, reminders, a push toward the appointment</li>
+            <li data-i18n="usecases.u3l3">Website, forms, chat apps, and CRM acting as one</li>
+          </ul>
+        </div>
+        <div class="usecase-card glass">
+          <div class="usecase-icon">&#128666;</div>
+          <h4 data-i18n="usecases.u4h">Wholesale &amp; logistics</h4>
+          <ul>
+            <li data-i18n="usecases.u4l1">Order confirmations, status updates, clean hand-offs</li>
+            <li data-i18n="usecases.u4l2">Fewer details dropped between departments</li>
+            <li data-i18n="usecases.u4l3">Tidier records and quicker reactions</li>
+          </ul>
+        </div>
+        <div class="usecase-card glass">
+          <div class="usecase-icon">&#127891;</div>
+          <h4 data-i18n="usecases.u5h">Courses &amp; knowledge businesses</h4>
+          <ul>
+            <li data-i18n="usecases.u5l1">Intake conversation, segmentation, warming sequences</li>
+            <li data-i18n="usecases.u5l2">Ongoing touches, common questions, message chains</li>
+            <li data-i18n="usecases.u5l3">Assistants supporting both sales and student care</li>
+          </ul>
+        </div>
+        <div class="usecase-card glass">
+          <div class="usecase-icon">&#127968;</div>
+          <h4 data-i18n="usecases.u6h">Property &amp; high-touch sales</h4>
+          <ul>
+            <li data-i18n="usecases.u6l1">Matching the request to the right option</li>
+            <li data-i18n="usecases.u6l2">Calls, viewings, and meetings land in the calendar</li>
+            <li data-i18n="usecases.u6l3">Less drop-off between curiosity and a meeting</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="container">
+      <h2 class="section-title" data-i18n="services.title">Our top services</h2>
+      <p class="section-desc" data-i18n="services.desc">The solutions we deploy most often — AI assistants, voice, search &amp; promotion, and CRM as the hub for every client interaction.</p>
+      <div class="services-grid">
+        <div class="service-card glass">
+          <div class="service-img service-img--chat" aria-hidden="true">
+            <span class="service-img-label">AI Chat</span>
+            <span class="service-img-icon">&#128172;</span>
+          </div>
+          <div class="service-body">
+          <span class="service-badge" data-i18n="services.s1badge">Foundation</span>
+          <h3 data-i18n="services.s1title">AI Chat Bots</h3>
+          <p data-i18n="services.s1desc">Custom AI assistants for your website, messengers, or internal tools — trained on your data and built for the exact job you need, not a generic widget off the shelf.</p>
+          <ul>
+            <li data-i18n="services.s1l1">Customer bots: greet, qualify, and hand off inquiries 24/7 across web and chat apps</li>
+            <li data-i18n="services.s1l2">Internal bots: database &amp; document Q&amp;A, staff training, management analytics, demand forecasting</li>
+            <li data-i18n="services.s1l3">Fully custom scope — we design, build, and integrate any chat agent your process requires</li>
+          </ul>
+          <div class="service-footer">
+            <span class="service-price" data-i18n="services.s1price">From $800</span>
+            <a href="contact.html" class="btn btn-sm" data-i18n="services.s1btn">Discuss your bot</a>
+          </div>
+          </div>
+        </div>
+        <div class="service-card glass">
+          <div class="service-img service-img--voice" aria-hidden="true">
+            <span class="service-img-label">Voice AI</span>
+            <span class="service-img-icon">&#127908;</span>
+          </div>
+          <div class="service-body">
+          <span class="service-badge accent" data-i18n="services.s2badge">Voice AI</span>
+          <h3 data-i18n="services.s2title">AI Voice Bot</h3>
+          <p data-i18n="services.s2desc">A voice agent that places and receives calls like a trained team member — with realistic real-time speech synthesis, smart scripts, and every conversation logged to your systems.</p>
+          <ul>
+            <li data-i18n="services.s2l1">Inbound: answer callers, route requests, and capture leads outside office hours</li>
+            <li data-i18n="services.s2l2">Outbound: reminders, confirmations, reactivation, and qualification calls at scale</li>
+            <li data-i18n="services.s2l3">Natural voices, multiple languages, telephony and CRM integrations included</li>
+          </ul>
+          <div class="service-footer">
+            <span class="service-price" data-i18n="services.s2price">From $1,200</span>
+            <a href="contact.html" class="btn btn-sm" data-i18n="services.s2btn">Hear a demo</a>
+          </div>
+          </div>
+        </div>
+        <div class="service-card glass">
+          <div class="service-img service-img--promo" aria-hidden="true">
+            <span class="service-img-label">Growth</span>
+            <span class="service-img-icon">&#128200;</span>
+          </div>
+          <div class="service-body">
+          <span class="service-badge" data-i18n="services.s3badge">Growth engine</span>
+          <h3 data-i18n="services.s3title">Google &amp; AI Promotion</h3>
+          <p data-i18n="services.s3desc">Full-funnel visibility: Google Ads, SEO, AI keyword intelligence, automated social presence — plus branded video and image creatives generated with AI for your campaigns.</p>
+          <ul>
+            <li data-i18n="services.s3l1">Google Ads built for conversions — not clicks that look good in a report</li>
+            <li data-i18n="services.s3l2">Technical SEO, content architecture, rankings in search and AI assistants</li>
+            <li data-i18n="services.s3l3">Auto-posting, comment &amp; DM replies, AI-generated ads and visuals for your brand</li>
+          </ul>
+          <div class="service-footer">
+            <span class="service-price" data-i18n="services.s3price">From $1.5k/mo</span>
+            <a href="contact.html" class="btn btn-sm" data-i18n="services.s3btn">Get a growth plan</a>
+          </div>
+          </div>
+        </div>
+        <div class="service-card glass">
+          <div class="service-img service-img--crm" aria-hidden="true">
+            <span class="service-img-label">CRM Hub</span>
+            <span class="service-img-icon">&#9881;</span>
+          </div>
+          <div class="service-body">
+          <span class="service-badge accent" data-i18n="services.s4badge">Client hub</span>
+          <h3 data-i18n="services.s4title">CRM Implementation</h3>
+          <p data-i18n="services.s4desc">We select the right CRM for your business — or build a custom layer on top — so every client touchpoint lives in one panel, with automation handling the repetitive work.</p>
+          <ul>
+            <li data-i18n="services.s4l1">Platform matched to your size, sales process, and integrations you actually need</li>
+            <li data-i18n="services.s4l2">Pipelines, roles, and connections to site, chat, email, telephony, and ads</li>
+            <li data-i18n="services.s4l3">Automated replies, promo sends, and client updates — no more manual copy-paste</li>
+          </ul>
+          <div class="service-footer">
+            <span class="service-price" data-i18n="services.s4price">From $2k</span>
+            <a href="contact.html" class="btn btn-sm" data-i18n="services.s4btn">Plan my CRM</a>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PROCESS -->
+  <section class="section" id="process">
+    <div class="container">
+      <h2 class="section-title" data-i18n="process.title">A rollout that is honest, staged, and measurable</h2>
+      <p class="section-desc" data-i18n="process.desc">Step one: locate the losses. Step two: connect the core — AI, CRM, ERP. Step three: pour fuel only on channels whose economics already check out.</p>
+      <div class="process-steps">
+        <div class="process-step glass">
+          <div class="process-step-visual process-step-visual--audit" aria-hidden="true">
+            <span class="process-step-num"><span>01</span></span>
+          </div>
+          <div class="process-step-body">
+            <h3>AI Growth &amp; Process Audit</h3>
+            <p data-i18n="process.s1p">We walk through the product, deal cycle, channels, CRM/ERP, paperwork, and team habits, marking every point where prospects, hours, margin, and accountability slip away.</p>
+          </div>
+        </div>
+        <div class="process-step glass">
+          <div class="process-step-visual process-step-visual--core" aria-hidden="true">
+            <span class="process-step-num"><span>02</span></span>
+          </div>
+          <div class="process-step-body">
+            <h3 data-i18n="process.s2h">The connected core</h3>
+            <p data-i18n="process.s2p">We assemble the inquiry path end to end: forms, pipeline stages, a first-response assistant, qualifying questions, owner assignment, automatic nudges, reminders, and a live dashboard.</p>
+          </div>
+        </div>
+        <div class="process-step glass">
+          <div class="process-step-visual process-step-visual--growth" aria-hidden="true">
+            <span class="process-step-num"><span>03</span></span>
+          </div>
+          <div class="process-step-body">
+            <h3 data-i18n="process.s3h">Demand and scaling</h3>
+            <p data-i18n="process.s3p">We double down on what the numbers support: search, paid media, outbound, service pages, content built for AI-era search, and sales playbooks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAIN POINTS -->
+  <section class="section">
+    <div class="container">
+      <p class="section-tag" data-i18n="pain.tag">The real story behind "marketing isn't working"</p>
+      <h2 class="section-title" data-i18n="pain.title">Four habits that quietly cap revenue</h2>
+      <div class="pain-section-layout">
+        <div class="pain-grid">
+          <div class="pain-card glass">
+            <h4 data-i18n="pain.c1h">First reply comes too late</h4>
+            <p data-i18n="pain.c1p">The prospect has already written in, but hours pass before anyone answers — and interest cools faster than the team notices.</p>
+            <div class="pain-solution" data-i18n="pain.c1s"><strong>Our fix:</strong> an always-on assistant for the first touch, sorting, assignment, and disciplined nudging.</div>
+          </div>
+          <div class="pain-card glass">
+            <h4 data-i18n="pain.c2h">Tools that don't talk to each other</h4>
+            <p data-i18n="pain.c2p">Website, ads, inbox, chat apps, CRM, and spreadsheets each live their own life. Leadership sees the bills, not the journey of a single prospect.</p>
+            <div class="pain-solution" data-i18n="pain.c2s"><strong>Our fix:</strong> one connected flow with shared stages, sources, and clear ownership.</div>
+          </div>
+          <div class="pain-card glass">
+            <h4 data-i18n="pain.c3h">Numbers exist, insight doesn't</h4>
+            <p data-i18n="pain.c3p">People log activities and agencies send reports, yet nobody can point to the stage where revenue actually evaporates.</p>
+            <div class="pain-solution" data-i18n="pain.c3s"><strong>Our fix:</strong> honest metrics, meaningful stages, and reporting built for decisions.</div>
+          </div>
+          <div class="pain-card glass">
+            <h4 data-i18n="pain.c4h">Growth means more hands, not more system</h4>
+            <p data-i18n="pain.c4p">Whenever volume rises, chaos rises with it — the company hires people instead of removing friction.</p>
+            <div class="pain-solution" data-i18n="pain.c4s"><strong>Our fix:</strong> machines absorb the repetition; people keep the judgment calls.</div>
+          </div>
+        </div>
+        <div class="pain-visual">
+          <h4 data-i18n="pain.beforeTitle">How it usually looks at the start</h4>
+          <div class="pain-visual-item">
+            <div class="pain-visual-dot red"></div>
+            <span class="pain-visual-text" data-i18n="pain.b1">Inquiries wait 4+ hours for an answer</span>
+          </div>
+          <div class="pain-visual-item">
+            <div class="pain-visual-dot red"></div>
+            <span class="pain-visual-text" data-i18n="pain.b2">Prospects vanish between channels</span>
+          </div>
+          <div class="pain-visual-item">
+            <div class="pain-visual-dot yellow"></div>
+            <span class="pain-visual-text" data-i18n="pain.b3">Pipeline stages exist on paper only</span>
+          </div>
+          <div class="pain-visual-item">
+            <div class="pain-visual-dot yellow"></div>
+            <span class="pain-visual-text" data-i18n="pain.b4">Reminders depend on memory</span>
+          </div>
+          <hr class="pain-divider">
+          <h4 data-i18n="pain.afterTitle">Once the system is live</h4>
+          <div class="pain-visual-item">
+            <div class="pain-visual-dot green"></div>
+            <span class="pain-visual-text" data-i18n="pain.a1">First answer within 30 seconds</span>
+          </div>
+          <div class="pain-visual-item">
+            <div class="pain-visual-dot green"></div>
+            <span class="pain-visual-text" data-i18n="pain.a2">One pipeline, clear ownership</span>
+          </div>
+          <div class="pain-visual-item">
+            <div class="pain-visual-dot purple"></div>
+            <span class="pain-visual-text" data-i18n="pain.a3">Nudges go out on schedule</span>
+          </div>
+          <div class="pain-visual-item">
+            <div class="pain-visual-dot purple"></div>
+            <span class="pain-visual-text" data-i18n="pain.a4">A dashboard you can trust</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTEGRATIONS -->
+  <section class="section">
+    <div class="container">
+      <p class="section-tag" data-i18n="integrations.tag">Connected to your stack</p>
+      <h2 class="section-title" data-i18n="integrations.title">Assistants embedded in the tools you already use</h2>
+      <p class="section-desc" data-i18n="integrations.desc">A serious implementation is more than a chat bubble in the corner. Our agents operate inside your actual workflow: CRM, ERP, mailbox, messengers, spreadsheets, internal docs, and reporting.</p>
+      <div class="integration-layout">
+        <div class="integration-grid">
+          <div class="integration-card glass">
+            <div class="integration-icon">&#9881;</div>
+            <div>
+              <h4 data-i18n="integrations.i1h">CRM, ERP, API, spreadsheets</h4>
+              <p data-i18n="integrations.i1p">Forms, CRM, ERP, sheets, catalogs, internal wikis, and external APIs feed the assistant accurate, current data.</p>
+            </div>
+          </div>
+          <div class="integration-card glass">
+            <div class="integration-icon">&#128172;</div>
+            <div>
+              <h4 data-i18n="integrations.i2h">Email, messengers, website</h4>
+              <p data-i18n="integrations.i2p">We meet customers in their channel of choice — site chat, inbox, messaging apps — with instant replies and scheduled touches.</p>
+            </div>
+          </div>
+          <div class="integration-card glass">
+            <div class="integration-icon">&#128218;</div>
+            <div>
+              <h4 data-i18n="integrations.i3h">Your documents &amp; knowledge</h4>
+              <p data-i18n="integrations.i3p">Answers come strictly from approved sources: manuals, price lists, sales decks, internal guides. No improvising.</p>
+            </div>
+          </div>
+          <div class="integration-card glass">
+            <div class="integration-icon">&#128274;</div>
+            <div>
+              <h4 data-i18n="integrations.i4h">Security &amp; boundaries</h4>
+              <p data-i18n="integrations.i4p">Sensitive workflows get role-based access, data-handling rules, full action history, and an architecture your security team will approve.</p>
+            </div>
+          </div>
+        </div>
+        <div class="integration-visual">
+          <img src="assets/integration-crm.png" alt="Neurowaves CRM and automation dashboard" class="integration-visual-img" width="1024" height="682" decoding="async" loading="lazy">
+        </div>
+      </div>
+      <div class="center-cta">
+        <a href="#contact" class="btn btn-primary" data-i18n="integrations.cta">Plan the integration</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASES -->
+  <section class="section" id="cases">
+    <div class="container">
+      <p class="section-tag" data-i18n="cases.tag">Selected work</p>
+      <h2 class="section-title" data-i18n="cases.title">Projects that deliver measurable results</h2>
+      <p class="section-desc" data-i18n="cases.desc">Not portfolio filler — each project ties SEO, custom systems, CRM, or AI assistants to real business outcomes.</p>
+      <div class="cases-grid">
+        <a href="case-sion-clinic.html" class="case-card-link">
+          <article class="case-card glass">
+            <div class="case-img case-img--sion" aria-hidden="true"></div>
+            <div class="case-body">
+              <div class="case-badge" data-i18n="cases.c1badge">Healthcare · AI SEO</div>
+              <h4 data-i18n="cases.c1title">AI SEO Blog for Sion Clinic</h4>
+              <p data-i18n="cases.c1p">An AI-ready content hub for a medical clinic — structured articles, search architecture, and visibility in Google and AI assistants that brings qualified patient inquiries.</p>
+            </div>
+          </article>
+        </a>
+        <a href="case-riyad-mabrouk-hotel.html" class="case-card-link">
+          <article class="case-card glass">
+            <div class="case-img case-img--hotel" aria-hidden="true"></div>
+            <div class="case-body">
+              <div class="case-badge" data-i18n="cases.c2badge">Hospitality · Custom System</div>
+              <h4 data-i18n="cases.c2title">Custom Inventory System for Riyad Mabrouk Hotel</h4>
+              <p data-i18n="cases.c2p">A purpose-built hotel inventory platform — stock, suppliers, departments, and reporting in one system instead of spreadsheets and chat threads.</p>
+            </div>
+          </article>
+        </a>
+        <a href="case-electronics-crm.html" class="case-card-link">
+          <article class="case-card glass">
+            <div class="case-img case-img--msp" aria-hidden="true"></div>
+            <div class="case-body">
+              <div class="case-badge" data-i18n="cases.c3badge">Manufacturing · CRM</div>
+              <h4 data-i18n="cases.c3title">Custom CRM for Electronics Manufacturing</h4>
+              <p data-i18n="cases.c3p">CRM tailored to factory sales cycles — pipelines linked to production stages, client history, and automated follow-ups built around how the business actually sells.</p>
+            </div>
+          </article>
+        </a>
+        <a href="case-x-trans.html" class="case-card-link">
+          <article class="case-card glass">
+            <div class="case-img case-img--xtrans" aria-hidden="true"></div>
+            <div class="case-body">
+              <div class="case-badge" data-i18n="cases.c4badge">Logistics · AI Bots</div>
+              <h4 data-i18n="cases.c4title">AI Voice &amp; Chat Bot for X-Trans</h4>
+              <p data-i18n="cases.c4p">AI voice and chat agents for a logistics company — inbound and outbound calls, shipment inquiries, smart routing to managers, and 24/7 coverage without losing context.</p>
+            </div>
+          </article>
+        </a>
+      </div>
+      <p class="cases-note" data-i18n="cases.note">These four are recent highlights from 100+ projects across healthcare, hospitality, manufacturing, and logistics.</p>
+      <div class="center-cta">
+        <a href="contact.html" class="btn btn-outline" data-i18n="cases.cta">Discuss your project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <p class="section-tag" data-i18n="about.tag">Who we are</p>
+      <div class="about-layout">
+        <div class="about-content">
+          <p class="section-subtitle" data-i18n="about.subtitle">An IT, AI &amp; automation team for growing businesses</p>
+          <h2 class="section-title" data-i18n="about.title">We build the systems your business actually runs on.</h2>
+          <p data-i18n="about.p1"><strong>Neurowaves</strong> designs and delivers technology for B2B, services, manufacturing, hospitality, and e-commerce — AI chat and voice bots, CRM implementation, custom internal systems, websites and web apps, Google promotion and SEO, data dashboards, integrations, and generative AI for your brand. Not a lone bot or landing page off the shelf: tools wired into how your company really works.</p>
+          <p data-i18n="about.p2">We start with analysis — where processes break, data gets lost, and teams lose time on manual work. Then we build, connect, and train. Our job is working infrastructure and automation; your team turns it into business outcomes.</p>
+          <div class="about-buttons">
+            <a href="contact.html" class="btn btn-primary" data-i18n="about.btn1">Request a review</a>
+            <a href="cases.html" class="btn btn-outline" data-i18n="about.btn2">Browse the work</a>
+          </div>
+        </div>
+        <div class="about-visual">
+          <img src="assets/about-team.png" alt="Neurowaves team at work" class="about-visual-img" width="1024" height="580" decoding="async" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACADEMY -->
+  <section class="section" id="academy">
+    <div class="container">
+      <p class="section-tag">Neurowaves Academy</p>
+      <h2 class="section-title" data-i18n="academy.title">Level up your team with practical AI</h2>
+      <p class="section-desc" data-i18n="academy.desc">Full implementation isn't always step one. Often a focused, hands-on course is enough to put AI to work in daily operations — for leadership, staff, and creative teams.</p>
+      <div class="academy-grid">
+        <div class="academy-card glass">
+          <div class="academy-card-img academy-card-img--management" aria-hidden="true"><span>Management AI</span></div>
+          <div class="academy-card-body">
+            <span class="academy-badge" data-i18n="academy.badge">Mini-course</span>
+            <h4 data-i18n="academy.c1h">Everyday AI for management</h4>
+            <p data-i18n="academy.c1p">ChatGPT, Gemini, working prompts, proposals, emails, playbooks, dashboards, and decision support — set up for owners and the management layer, not generic demos.</p>
+          </div>
+        </div>
+        <div class="academy-card glass">
+          <div class="academy-card-img academy-card-img--staff" aria-hidden="true"><span>Staff Training</span></div>
+          <div class="academy-card-body">
+            <span class="academy-badge" data-i18n="academy.badge">Mini-course</span>
+            <h4 data-i18n="academy.c2h">AI tools for your staff</h4>
+            <p data-i18n="academy.c2p">We train your team on the AI tools that fit their actual jobs — sales, support, operations, admin — with workflows they can use from day one.</p>
+          </div>
+        </div>
+        <div class="academy-card glass">
+          <div class="academy-card-img academy-card-img--generative" aria-hidden="true"><span>Generative AI</span></div>
+          <div class="academy-card-body">
+            <span class="academy-badge" data-i18n="academy.badge">Mini-course</span>
+            <h4 data-i18n="academy.c3h">Generative AI that triggers attention</h4>
+            <p data-i18n="academy.c3p">How to produce scroll-stopping AI videos, images, and 3D visuals that hook people and drive action — prompts, tools, and brand-safe creative workflows.</p>
+          </div>
+        </div>
+      </div>
+      <div class="academy-meta">
+        <div data-i18n="academy.meta1"><strong>Format:</strong> compact, hands-on, zero motivational padding.</div>
+        <div data-i18n="academy.meta2"><strong>Audience:</strong> management, team leads, staff, and marketers who want practical AI skills.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="faq-layout">
+        <div class="faq-side">
+          <h2 class="section-title" data-i18n="faq.title">Questions about Neurowaves</h2>
+          <p class="section-desc" data-i18n="faq.desc">Straight answers about our IT, marketing, and AI services — process, pricing, and how we work together.</p>
+          <a href="#contact" class="btn btn-outline" data-i18n="faq.btn">Didn't find yours?</a>
+        </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question"><span data-i18n="faq.q1">What does Neurowaves do?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p data-i18n="faq.a1">We're a full IT, marketing, and AI team for growing businesses. We build websites and web apps, internal and sales systems, CRM and integrations, automate workflows, and embed AI into daily operations — chat and voice bots, generative content, smart analytics. We also run marketing that brings demand: Google Ads, SEO, social, AI creatives, and funnels tied to your stack. One partner connects technology, growth, and operations so leads, data, and teams stay in sync.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span data-i18n="faq.q2">What IT, marketing, and AI services do you cover?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p data-i18n="faq.a2">The full stack your business runs on — not a single plugin. IT: websites, web apps, custom internal and sales systems, CRM, ERP connections, APIs, dashboards, and integrations. Marketing: Google Ads, SEO, content hubs, social automation, AI-generated creatives, and funnels wired to sales. AI: custom chat and voice agents, workflow automation, document Q&A, staff training, and generative tools for your brand. Clients often start with AI Chat Bots, Voice Bot, Google & AI Promotion, or CRM — but we scope every project around your real process, not a fixed menu.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span data-i18n="faq.q3">How does the 2-day audit work?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p data-i18n="faq.a3">In 48 hours we review your website, marketing, forms, chat channels, CRM, team replies, and follow-up habits. You get ten weak spots, ten fixes you can apply immediately, and a roadmap for IT, AI, and marketing automation. It starts from $300 and is the usual first step before a bigger build.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span data-i18n="faq.q4">We don't have a CRM yet — is that a problem?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p data-i18n="faq.a4">No. CRM Implementation is one of our main services — we pick the right platform for your size and process, or build a custom layer on top. Many clients come to us with spreadsheets and chat threads; we turn that into one panel with pipelines, roles, and automation.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span data-i18n="faq.q5">How is your AI chat bot different from a ready-made widget?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p data-i18n="faq.a5">We build bots for your actual job — customer greeting and qualification, internal document Q&A, staff training, analytics — trained on your approved data and wired into your site, messengers, and CRM. Not a generic plugin with a decision tree and your logo on top.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span data-i18n="faq.q6">Do you build AI voice agents for phone calls?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p data-i18n="faq.a6">Yes. Our voice bot handles inbound and outbound calls with natural speech, smart scripts, and logging to your CRM — reminders, confirmations, lead qualification, and routing to the right manager. Projects start from $1,200 depending on call volume and integrations.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span data-i18n="faq.q7">Who is Neurowaves a good fit for?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p data-i18n="faq.a7">B2B companies, service businesses, manufacturing, hospitality, e-commerce, and teams that have outgrown disconnected tools. If inquiries get lost between channels, CRM stages exist only on paper, or marketing and sales don't share one picture — that's where we work.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span data-i18n="faq.q8">How does pricing work?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p data-i18n="faq.a8">Each project is scoped after we understand your process. Public starting points: 2-day audit from $300, AI chat bots from $800, voice bots from $1,200, Google & AI promotion from $1.5k/month, CRM implementation from $2k. Larger custom systems are quoted after analysis.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span data-i18n="faq.q9">Will automation replace our sales team?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p data-i18n="faq.a9">No — we automate the repetitive layer: first replies, sorting, reminders, data entry, standard answers, and scheduled follow-ups. Your people keep judgment calls, negotiations, and closing. The goal is fewer dropped inquiries, not fewer humans.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question"><span data-i18n="faq.q10">How do projects usually start and roll out?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p data-i18n="faq.a10">Most begin with the audit or a focused review call. Then we work in stages: find where time and leads are lost, connect the core (IT stack, site, bots, CRM, marketing, integrations), and only then scale channels that the numbers support. We don't rebuild everything at once unless you ask us to.</p></div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-cta" id="contact">
+    <div class="container">
+      <h2 class="section-title" data-i18n="contact.title">Shall we take a look at your funnel together?</h2>
+      <p class="section-desc" data-i18n="contact.desc">The first step is a compact audit: where money slips away, what to improve on the site, and which process deserves automation first.</p>
+      <div class="contact-glass">
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <input type="text" name="name" data-i18n-placeholder="form.name" placeholder="Your name" required>
+            <input type="email" name="email" placeholder="Email" required>
+          </div>
+          <div class="form-row">
+            <input type="tel" name="phone" data-i18n-placeholder="form.phone" placeholder="Phone">
+            <input type="text" name="company" data-i18n-placeholder="form.company" placeholder="Company">
+          </div>
+          <textarea name="message" data-i18n-placeholder="form.message" placeholder="Tell us briefly about your project..." rows="4"></textarea>
+          <label class="form-consent">
+            <input type="checkbox" required>
+            <span data-i18n="form.consent">I consent to my data being processed and to being contacted (GDPR)</span>
+          </label>
+          <button type="submit" class="btn btn-primary btn-lg" data-i18n="form.submit">Send my request &rarr;</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/logo-white.png" alt="Neurowaves" class="footer-logo">
+          <p class="footer-name">Neurowaves</p>
+          <p class="footer-desc" data-i18n="footer.desc"><strong>Neurowaves</strong> designs and delivers IT, AI and automation — chat and voice bots, CRM, custom systems, websites, Google promotion and SEO, integrations, and generative AI for your brand.</p>
+        </div>
+        <div class="footer-links">
+          <h5 data-i18n="footer.nav">Navigation</h5>
+          <a href="services.html" data-i18n="nav.services">Services</a>
+          <a href="cases.html" data-i18n="nav.cases">Cases</a>
+          <a href="blog.html" data-i18n="nav.blog">Blog</a>
+          <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+          <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        </div>
+        <div class="footer-links">
+          <h5 data-i18n="footer.contacts">Contact</h5>
+          <a href="mailto:aineurowaves@gmail.com" class="footer-contact-link"><span class="footer-contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>aineurowaves@gmail.com</a>
+          <a href="tel:+491752078586" class="footer-contact-link"><span class="footer-contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.04 12.04 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.04 12.04 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>+49 175 2078586</a>
+          <a href="https://wa.me/491752078586" class="footer-contact-link" target="_blank" rel="noopener noreferrer"><span class="footer-contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.435 9.884-9.884 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></span>WhatsApp</a>
+          <a href="https://t.me/arthurrose97" class="footer-contact-link" target="_blank" rel="noopener noreferrer"><span class="footer-contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></span>Telegram</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2020-2026 Neurowaves. All rights reserved.</span>
+        <a href="#" data-i18n="footer.privacy">Privacy policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="i18n.js?v=22" defer></script>
+  <script src="script.js?v=14" defer></script>
+</body>
+</html>
