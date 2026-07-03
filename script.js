@@ -138,15 +138,29 @@
   }
 
   function updateLogo() {
-    const { startX, endX, startScale, endScale } = getLogoConfig();
-    const progress = Math.min(scrollY / (heroHeight() * 1.2), 1);
+    const w = window.innerWidth;
+    const isMobile = w <= 768;
+    const vh = heroHeight();
+    const progress = Math.min(scrollY / (vh * 1.2), 1);
     const eased = easeInOutSine(progress);
+    const { startX, endX, startScale, endScale } = getLogoConfig();
     const currentX = startX + (endX - startX) * eased;
     const currentScale = startScale + (endScale - startScale) * eased;
+
+    /* Past hero on mobile — fixed logo must not float over white sections */
+    if (isMobile && scrollY > vh * 0.55) {
+      logo3d.style.visibility = 'hidden';
+      logo3d.style.opacity = '0';
+      return;
+    }
+
+    logo3d.style.visibility = 'visible';
     const fade = getBaseOpacity() * (1 - eased * 0.25);
 
     logoInner.style.transform = `translate(-50%, -50%) scale(${currentScale})`;
-    logoInner.style.opacity = String(fade);
+    /* Opacity on video layer breaks blend mode → visible square on mobile Safari */
+    logoInner.style.opacity = isMobile ? '1' : String(fade);
+    logo3d.style.opacity = isMobile ? '1' : '';
     logo3d.style.left = currentX + '%';
   }
 

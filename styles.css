@@ -106,13 +106,20 @@ body {
   display: none;
 }
 
-/* Light: WebM matte is black — screen merges it with any --bg */
-[data-theme="light"] .logo-3d-inner .logo-video {
+/* Light: WebM matte is black — screen on wrapper (not video) for iOS Safari */
+[data-theme="light"] .logo-3d-bg {
   mix-blend-mode: screen;
+  -webkit-mix-blend-mode: screen;
+}
+[data-theme="light"] .logo-3d-inner .logo-video {
+  mix-blend-mode: normal;
+  -webkit-mix-blend-mode: normal;
+  background: transparent;
 }
 
-/* Keep container fully opaque so blend mode works (opacity on parent = visible square on mobile) */
-.logo-3d-bg { opacity: 1 !important; }
+.logo-3d-inner .logo-video {
+  background: transparent;
+}
 
 @media (max-width: 1024px) {
   .logo-3d-bg {
@@ -128,6 +135,16 @@ body {
     width: min(400px, 96vw);
     height: min(400px, 96vw);
     top: 40%;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+  /* iOS: blend on fixed layer; inner must stay fully opaque */
+  [data-theme="light"] .logo-3d-bg {
+    mix-blend-mode: screen;
+    -webkit-mix-blend-mode: screen;
+  }
+  .logo-3d-inner {
+    opacity: 1 !important;
   }
 }
 
