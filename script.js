@@ -115,9 +115,26 @@
   const logoVideo = logoInner.querySelector('.logo-video');
   const logoFallback = logoInner.querySelector('.logo-fallback');
   let scrollY = 0;
+  let canvas = null;
+  let canvasCtx = null;
+  let rafId = 0;
+  let videoFrameCb = null;
+
   const heroHeight = () => window.innerHeight;
+  const isMobile = () => window.innerWidth <= 768;
 
   function easeInOutSine(x) { return -(Math.cos(Math.PI * x) - 1) / 2; }
+
+  function hideFallback() {
+    logoInner.classList.add('is-video-active');
+    if (logoFallback) logoFallback.style.display = 'none';
+  }
+
+  function tryPlay() {
+    if (!logoVideo) return;
+    const p = logoVideo.play();
+    if (p && typeof p.then === 'function') p.then(hideFallback).catch(() => {});
+  }
 
   function ensureLogoVideo() {
     if (!logoVideo) return;
@@ -126,31 +143,102 @@
     logoVideo.setAttribute('playsinline', '');
     logoVideo.setAttribute('webkit-playsinline', '');
     logoVideo.preload = 'auto';
+    logoVideo.loop = true;
 
-    const onPlaying = () => {
-      logoInner.classList.add('is-video-active');
-      if (logoFallback) logoFallback.style.display = 'none';
-    };
-
-    const tryPlay = () => {
-      const p = logoVideo.play();
-      if (p && typeof p.then === 'function') {
-        p.then(onPlaying).catch(() => {});
-      }
-    };
-
-    logoVideo.addEventListener('playing', onPlaying);
+    logoVideo.addEventListener('playing', hideFallback);
     logoVideo.addEventListener('loadeddata', tryPlay, { once: true });
-    if (logoVideo.readyState >= 2) tryPlay();
-    else tryPlay();
+    tryPlay();
 
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) tryPlay();
     });
-    document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
+    document.addEventListener('touchstart', tryPlay, { passive: true });
   }
 
-  ensureLogoVideo();
+  function stopCanvasLoop() {
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = 0;
+    if (videoFrameCb && logoVideo && typeof logoVideo.cancelVideoFrameCallback === 'function') {
+      logoVideo.cancelVideoFrameCallback(videoFrameCb);
+    }
+    videoFrameCb = null;
+  }
+
+  function removeMobileCanvas() {
+    stopCanvasLoop();
+    if (canvas) {
+      canvas.remove();
+      canvas = null;
+      canvasCtx = null;
+    }
+    if (logoVideo) logoVideo.classList.remove('logo-video--source');
+  }
+
+  function resizeCanvas() {
+    if (!canvas) return;
+    const size = Math.max(1, Math.round(logo3d.offsetWidth || 400));
+    if (canvas.width !== size) {
+      canvas.width = size;
+      canvas.height = size;
+    }
+  }
+
+  function chromaKeyFrame() {
+    if (!canvasCtx || !logoVideo || logoVideo.readyState < 2) return;
+    const w = canvas.width;
+    const h = canvas.height;
+    canvasCtx.clearRect(0, 0, w, h);
+    canvasCtx.drawImage(logoVideo, 0, 0, w, h);
+    const imageData = canvasCtx.getImageData(0, 0, w, h);
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      if (d[i] < 50 && d[i + 1] < 50 && d[i + 2] < 50) d[i + 3] = 0;
+    }
+    canvasCtx.putImageData(imageData, 0, 0);
+    if (logoVideo.paused && !document.hidden) tryPlay();
+  }
+
+  function startCanvasLoop() {
+    stopCanvasLoop();
+    if (!canvas || !logoVideo) return;
+
+    if (typeof logoVideo.requestVideoFrameCallback === 'function') {
+      const step = () => {
+        if (!isMobile() || !canvas) return;
+        chromaKeyFrame();
+        videoFrameCb = logoVideo.requestVideoFrameCallback(step);
+      };
+      videoFrameCb = logoVideo.requestVideoFrameCallback(step);
+    } else {
+      const loop = () => {
+        if (!isMobile() || !canvas) return;
+        chromaKeyFrame();
+        rafId = requestAnimationFrame(loop);
+      };
+      rafId = requestAnimationFrame(loop);
+    }
+  }
+
+  function setupMobileCanvas() {
+    if (!isMobile() || !logoVideo) {
+      removeMobileCanvas();
+      return;
+    }
+
+    logoVideo.classList.add('logo-video--source');
+    hideFallback();
+
+    if (!canvas) {
+      canvas = document.createElement('canvas');
+      canvas.className = 'logo-canvas';
+      canvas.setAttribute('aria-hidden', 'true');
+      logoInner.appendChild(canvas);
+      canvasCtx = canvas.getContext('2d', { willReadFrequently: true });
+    }
+
+    resizeCanvas();
+    startCanvasLoop();
+  }
 
   function getLogoConfig() {
     const w = window.innerWidth;
@@ -167,50 +255,51 @@
       if (w <= 1024) return 0.28;
       return 0.42;
     }
-    if (w <= 480) return 0.95;
-    if (w <= 768) return 1;
     if (w <= 1024) return 0.5;
     return 1;
   }
 
-  function isPastHeroOnMobile() {
-    if (window.innerWidth > 768) return false;
-    if (heroEl) {
-      const rect = heroEl.getBoundingClientRect();
-      return rect.bottom < window.innerHeight * 0.2;
-    }
-    return scrollY > heroHeight() * 0.85;
+  function shouldHideMobileLogo() {
+    if (!isMobile()) return false;
+    const limit = heroEl
+      ? Math.max(heroEl.offsetHeight - 60, heroHeight() * 0.5)
+      : heroHeight() * 0.9;
+    return scrollY > limit;
   }
 
   function updateLogo() {
-    const w = window.innerWidth;
-    const isMobile = w <= 768;
+    const mobile = isMobile();
     const progress = Math.min(scrollY / (heroHeight() * 1.2), 1);
     const eased = easeInOutSine(progress);
     const { startX, endX, startScale, endScale } = getLogoConfig();
     const currentX = startX + (endX - startX) * eased;
     const currentScale = startScale + (endScale - startScale) * eased;
 
-    if (isPastHeroOnMobile()) {
-      logo3d.style.visibility = 'hidden';
-      logo3d.style.opacity = '0';
+    if (shouldHideMobileLogo()) {
+      logo3d.style.display = 'none';
       return;
     }
 
+    logo3d.style.display = 'block';
     logo3d.style.visibility = 'visible';
     logo3d.style.opacity = '1';
-    const fade = getBaseOpacity() * (1 - eased * 0.2);
 
     logoInner.style.transform = `translate(-50%, -50%) scale(${currentScale})`;
-    logoInner.style.opacity = isMobile ? '1' : String(fade);
+    logoInner.style.opacity = mobile ? '1' : String(getBaseOpacity() * (1 - eased * 0.2));
     logo3d.style.left = currentX + '%';
   }
+
+  ensureLogoVideo();
+  setupMobileCanvas();
 
   window.addEventListener('scroll', () => {
     scrollY = window.scrollY;
     requestAnimationFrame(updateLogo);
-  });
+  }, { passive: true });
+
   window.addEventListener('resize', () => {
+    setupMobileCanvas();
+    resizeCanvas();
     requestAnimationFrame(updateLogo);
   });
 
