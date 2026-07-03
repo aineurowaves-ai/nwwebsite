@@ -176,10 +176,12 @@
 
   function resizeCanvas() {
     if (!canvas) return;
-    const size = Math.max(1, Math.round(logo3d.offsetWidth || 400));
-    if (canvas.width !== size) {
-      canvas.width = size;
-      canvas.height = size;
+    const cssSize = Math.max(1, Math.round(logo3d.offsetWidth || 400));
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const px = Math.round(cssSize * dpr);
+    if (canvas.width !== px) {
+      canvas.width = px;
+      canvas.height = px;
     }
   }
 
@@ -189,13 +191,6 @@
     const h = canvas.height;
     canvasCtx.clearRect(0, 0, w, h);
     canvasCtx.drawImage(logoVideo, 0, 0, w, h);
-    const imageData = canvasCtx.getImageData(0, 0, w, h);
-    const d = imageData.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const lum = d[i] * 0.299 + d[i + 1] * 0.587 + d[i + 2] * 0.114;
-      if (lum < 92) d[i + 3] = 0;
-    }
-    canvasCtx.putImageData(imageData, 0, 0);
     if (logoVideo.paused && !document.hidden) tryPlay();
   }
 
@@ -234,7 +229,7 @@
       canvas.className = 'logo-canvas';
       canvas.setAttribute('aria-hidden', 'true');
       logoInner.appendChild(canvas);
-      canvasCtx = canvas.getContext('2d', { alpha: true, willReadFrequently: true });
+      canvasCtx = canvas.getContext('2d', { alpha: true });
     }
 
     resizeCanvas();

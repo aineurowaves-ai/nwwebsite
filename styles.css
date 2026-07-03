@@ -138,6 +138,9 @@ body {
   display: block;
   pointer-events: none;
   background: transparent;
+  /* Same technique as desktop video — removes black matte without eating logo edges */
+  mix-blend-mode: screen;
+  -webkit-mix-blend-mode: screen;
 }
 
 @media (max-width: 1024px) {
