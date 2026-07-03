@@ -1100,7 +1100,7 @@ img { max-width: 100%; display: block; }
 .section-contact-channels { padding-top: 0; }
 .contact-channels-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 .contact-channel-card {

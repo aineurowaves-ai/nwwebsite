@@ -1,7 +1,7 @@
 /* Neurowaves i18n */
 (function () {
   const LANGS = ['en', 'de', 'fr', 'es', 'uk'];
-  const LANG_LABELS = { en: 'EN', de: 'DE', fr: 'FR', es: 'ES', uk: 'UK' };
+  const LANG_LABELS = { en: 'EN', de: 'DE', fr: 'FR', es: 'ES', uk: 'UA' };
   const META = {
     en: { title: "Neurowaves — IT, AI, automation & marketing for growing businesses", description: "Neurowaves delivers IT projects, AI implementation, workflow automation, and marketing — wired into one system so your business runs faster and loses fewer leads." },
     uk: { title: "Neurowaves — IT, AI, автоматизація та маркетинг для бізнесу", description: "Neurowaves реалізує IT-проєкти, впроваджує AI, автоматизує процеси та веде маркетинг — в одній системі, щоб бізнес працював швидше й не губив звернення." },
