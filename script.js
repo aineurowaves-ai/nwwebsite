@@ -197,6 +197,7 @@
       canvasCtx = null;
     }
     if (logoVideo) logoVideo.classList.remove('logo-video--source');
+    logoInner.classList.remove('is-canvas-active');
   }
 
   function resizeCanvas() {
@@ -216,8 +217,22 @@
       const r = d[i];
       const g = d[i + 1];
       const b = d[i + 2];
-      /* Light theme only: remove matte pixels — never gray logo shadows (colored pixels kept) */
       if (r <= 16 && g <= 16 && b <= 16) {
+        d[i + 3] = 0;
+      }
+    }
+  }
+
+  function keyDarkMatte(imageData) {
+    const d = imageData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+      const max = Math.max(r, g, b);
+      const spread = max - Math.min(r, g, b);
+      /* Neutral near-black matte only — keep colored logo shadows */
+      if (max <= 18 && spread <= 4) {
         d[i + 3] = 0;
       }
     }
@@ -229,12 +244,13 @@
     const h = canvas.height;
     canvasCtx.clearRect(0, 0, w, h);
     canvasCtx.drawImage(logoVideo, 0, 0, w, h);
-
+    const imageData = canvasCtx.getImageData(0, 0, w, h);
     if (isLightTheme()) {
-      const imageData = canvasCtx.getImageData(0, 0, w, h);
       keyPureBlackMatte(imageData);
-      canvasCtx.putImageData(imageData, 0, 0);
+    } else {
+      keyDarkMatte(imageData);
     }
+    canvasCtx.putImageData(imageData, 0, 0);
 
     if (logoVideo.paused && !document.hidden) tryPlay();
   }
@@ -267,6 +283,7 @@
     }
 
     logoVideo.classList.add('logo-video--source');
+    logoInner.classList.add('is-canvas-active');
     hideFallback();
     syncMobileLogoSource();
 
@@ -275,7 +292,7 @@
       canvas.className = 'logo-canvas';
       canvas.setAttribute('aria-hidden', 'true');
       logoInner.appendChild(canvas);
-      canvasCtx = canvas.getContext('2d', { alpha: true });
+      canvasCtx = canvas.getContext('2d', { alpha: true, willReadFrequently: true });
     }
 
     resizeCanvas();
