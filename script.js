@@ -122,8 +122,8 @@
   let rafId = 0;
   let videoFrameCb = null;
 
-  const LOGO_VIDEO_DARK = 'assets/logo-3d.webm';
-  const LOGO_VIDEO_LIGHT = 'assets/logo-3d-light.webm';
+  const LOGO_VIDEO_DARK = '/assets/logo-3d.webm';
+  const LOGO_VIDEO_LIGHT = '/assets/logo-3d-light.webm';
 
   const heroHeight = () => window.innerHeight;
   const isMobile = () => window.innerWidth <= 768;
