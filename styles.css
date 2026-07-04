@@ -1094,7 +1094,20 @@ img { max-width: 100%; display: block; }
   border-top: 1px solid var(--border-glass);
   margin-top: auto;
 }
-.service-price { font-size: 1.1rem; font-weight: 700; color: var(--accent-light); }
+.service-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-light);
+  padding: 8px 16px;
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  border-radius: 50px;
+  background: transparent;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+[data-theme="light"] .service-price {
+  border-color: rgba(124, 58, 237, 0.35);
+}
 
 /* ============ CONTACT CHANNELS ============ */
 .section-contact-channels { padding-top: 0; }
