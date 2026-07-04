@@ -1099,14 +1099,14 @@ img { max-width: 100%; display: block; }
   font-weight: 700;
   color: var(--accent-light);
   padding: 8px 16px;
-  border: 1px solid rgba(168, 85, 247, 0.45);
+  border: 1px solid rgba(168, 85, 247, 0.55);
   border-radius: 50px;
   background: transparent;
   line-height: 1.2;
   white-space: nowrap;
 }
 [data-theme="light"] .service-price {
-  border-color: rgba(124, 58, 237, 0.35);
+  border-color: rgba(124, 58, 237, 0.45);
 }
 
 /* ============ CONTACT CHANNELS ============ */
