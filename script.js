@@ -1,4 +1,9 @@
 /* Neurowaves site — build 2026-07-03-v71 */
+(function forceDarkTheme() {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  try { localStorage.removeItem('nw-theme'); } catch (_) {}
+})();
+
 /* ============ STARFIELD BACKGROUND — ORBIT AROUND LOGO ============ */
 (function () {
   const canvas = document.getElementById('stars-canvas');
@@ -444,22 +449,11 @@
 /* ============ THEME & LANGUAGE (nav) ============ */
 function initNavPreferences() {
   const root = document.documentElement;
-  const themeToggle = document.getElementById('theme-toggle');
   const langDetails = document.getElementById('lang-details');
   const langMenu = document.getElementById('lang-menu');
 
-  const storedTheme = localStorage.getItem('nw-theme');
-  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-  root.setAttribute('data-theme', storedTheme || (prefersLight ? 'light' : 'dark'));
-
-  themeToggle?.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-    root.setAttribute('data-theme', next);
-    localStorage.setItem('nw-theme', next);
-    langDetails?.removeAttribute('open');
-  });
+  root.setAttribute('data-theme', 'dark');
+  localStorage.removeItem('nw-theme');
 
   langMenu?.querySelectorAll('.lang-option').forEach((btn) => {
     btn.addEventListener('click', (e) => {

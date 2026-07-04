@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=76">
+  <link rel="stylesheet" href="/styles.css?v=78">
   <style>
     .navbar .nav-tools button,
     .navbar .nav-tools summary {
@@ -55,10 +55,10 @@
         <a href="/contact/" data-i18n="nav.contact">Contact</a>
       </div>
       <div class="nav-actions">
-        <div class="nav-tools" role="group" aria-label="Site preferences">
+        <div class="nav-tools" role="group" aria-label="Language">
           <details class="lang-details" id="lang-details">
             <summary class="nav-tool-btn lang-summary" aria-label="Language">
-              <svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="currentColor" d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+              <svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><ellipse cx="12" cy="12" rx="4" ry="10"/></svg>
               <span class="lang-code" id="lang-current">EN</span>
               <svg class="lang-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </summary>
@@ -70,13 +70,8 @@
               <button type="button" class="lang-option" data-lang="uk">Українська</button>
             </div>
           </details>
-          <span class="nav-tools-divider" aria-hidden="true"></span>
-          <button type="button" class="nav-tool-btn theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-            <svg class="tool-icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor"/></svg>
-            <svg class="tool-icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
-          </button>
         </div>
-        <a href="/contact/" class="nav-cta" data-i18n="nav.cta">Let's talk &rarr;</a>
+        <a href="/contact/" class="nav-cta" data-i18n="nav.cta">Let's talk</a>
       </div>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -102,7 +97,7 @@
             <p class="blog-meta" data-i18n="blog.a1meta">Meta</p>
             <h3 data-i18n="blog.a1h">Title</h3>
             <p data-i18n="blog.a1p">Excerpt</p>
-            <a href="/blog/where-inquiries-die/" class="btn btn-sm btn-outline" data-i18n="blog.read">Read article →</a>
+            <a href="/blog/where-inquiries-die/" class="btn btn-sm btn-outline" data-i18n="blog.read">Read article</a>
           </div>
         </article>
         <article class="blog-card glass">
@@ -111,7 +106,7 @@
             <p class="blog-meta" data-i18n="blog.a2meta">Meta</p>
             <h3 data-i18n="blog.a2h">Title</h3>
             <p data-i18n="blog.a2p">Excerpt</p>
-            <a href="/blog/ai-agents-vs-chatbots/" class="btn btn-sm btn-outline" data-i18n="blog.read">Read article →</a>
+            <a href="/blog/ai-agents-vs-chatbots/" class="btn btn-sm btn-outline" data-i18n="blog.read">Read article</a>
           </div>
         </article>
         <article class="blog-card glass">
@@ -120,7 +115,7 @@
             <p class="blog-meta" data-i18n="blog.a3meta">Meta</p>
             <h3 data-i18n="blog.a3h">Title</h3>
             <p data-i18n="blog.a3p">Excerpt</p>
-            <a href="/blog/pipeline-stages/" class="btn btn-sm btn-outline" data-i18n="blog.read">Read article →</a>
+            <a href="/blog/pipeline-stages/" class="btn btn-sm btn-outline" data-i18n="blog.read">Read article</a>
           </div>
         </article>
         <article class="blog-card glass">
@@ -129,7 +124,7 @@
             <p class="blog-meta" data-i18n="blog.a4meta">Meta</p>
             <h3 data-i18n="blog.a4h">Title</h3>
             <p data-i18n="blog.a4p">Excerpt</p>
-            <a href="/blog/landing-pages-ai-search/" class="btn btn-sm btn-outline" data-i18n="blog.read">Read article →</a>
+            <a href="/blog/landing-pages-ai-search/" class="btn btn-sm btn-outline" data-i18n="blog.read">Read article</a>
           </div>
         </article>
         <article class="blog-card glass">
@@ -138,7 +133,7 @@
             <p class="blog-meta" data-i18n="blog.a5meta">Meta</p>
             <h3 data-i18n="blog.a5h">Title</h3>
             <p data-i18n="blog.a5p">Excerpt</p>
-            <a href="/blog/fractional-cmo/" class="btn btn-sm btn-outline" data-i18n="blog.read">Read article →</a>
+            <a href="/blog/fractional-cmo/" class="btn btn-sm btn-outline" data-i18n="blog.read">Read article</a>
           </div>
         </article>
         <article class="blog-card glass">
@@ -147,7 +142,7 @@
             <p class="blog-meta" data-i18n="blog.a6meta">Meta</p>
             <h3 data-i18n="blog.a6h">Title</h3>
             <p data-i18n="blog.a6p">Excerpt</p>
-            <a href="/blog/reactivation-sequences/" class="btn btn-sm btn-outline" data-i18n="blog.read">Read article →</a>
+            <a href="/blog/reactivation-sequences/" class="btn btn-sm btn-outline" data-i18n="blog.read">Read article</a>
           </div>
         </article>
       </div>
@@ -186,8 +181,8 @@
     </div>
   </footer>
 
-  <script src="/i18n.js?v=26" defer></script>
-  <script src="/blog-articles-i18n.js?v=26" defer></script>
-  <script src="/script.js?v=73" defer></script>
+  <script src="/i18n.js?v=27" defer></script>
+  <script src="/blog-articles-i18n.js?v=27" defer></script>
+  <script src="/script.js?v=74" defer></script>
 </body>
 </html>
