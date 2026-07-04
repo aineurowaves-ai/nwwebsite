@@ -1,4 +1,4 @@
-/* Neurowaves site — build 2026-07-05-v75 */
+/* Neurowaves site — build 2026-07-05-v77 */
 (function forceDarkTheme() {
   document.documentElement.setAttribute('data-theme', 'dark');
   try { localStorage.removeItem('nw-theme'); } catch (_) {}
@@ -548,39 +548,52 @@ document.getElementById('contact-form')?.addEventListener('submit', (e) => {
 
   document.documentElement.classList.add('nw-custom-cursor');
 
+  const cursorSvgDefs = (suffix) => `
+    <defs>
+      <linearGradient id="nw-crystal-fill-${suffix}" x1="3" y1="2" x2="18" y2="24" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#f5f3ff"/>
+        <stop offset="28%" stop-color="#ddd6fe"/>
+        <stop offset="58%" stop-color="#c084fc"/>
+        <stop offset="100%" stop-color="#7c3aed"/>
+      </linearGradient>
+      <linearGradient id="nw-crystal-shine-${suffix}" x1="3" y1="2" x2="10" y2="14" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.85)"/>
+        <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+      </linearGradient>
+      <linearGradient id="nw-crystal-edge-${suffix}" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.9)"/>
+        <stop offset="100%" stop-color="rgba(192,132,252,0.45)"/>
+      </linearGradient>
+    </defs>`;
+
+  const arrowPath = 'M2.5 1.5 L2.5 18.5 L7.2 14.2 L10.2 20.8 L12.4 19.7 L9.6 13.2 L16.5 13.2 Z';
+  const handPath = 'M8.2 3.2c0-1.2 1.6-1.2 1.6 0v5.1h1.1V4.1c0-1.2 1.6-1.2 1.6 0v4.2h1.1V5.6c0-1.2 1.5-1.2 1.5 0v6.8c0 3.4-2.2 6.2-5.8 7.1l-1.1 2.4c-0.5 1.1-2.2 0.6-2.2-0.7v-2.8C3.3 20.8 1.5 18.3 1.5 15.2V8.4c0-1.2 1.5-1.2 1.5 0v2.5h1.1V3.2z';
+
   const cursor = document.createElement('div');
   cursor.className = 'nw-cursor';
   cursor.setAttribute('aria-hidden', 'true');
-  cursor.innerHTML = '<span class="nw-cursor-ring"></span><span class="nw-cursor-core"></span>';
+  cursor.innerHTML = `
+    <div class="nw-cursor-arrow">
+      <svg class="nw-cursor-svg" viewBox="0 0 20 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        ${cursorSvgDefs('arrow')}
+        <path d="${arrowPath}" fill="rgba(124,58,237,0.28)"/>
+        <path d="${arrowPath}" fill="url(#nw-crystal-fill-arrow)" stroke="url(#nw-crystal-edge-arrow)" stroke-width="0.85" stroke-linejoin="round"/>
+        <path d="M2.5 1.5 L2.5 11.5 L7.5 10.5 L9.5 13.2 Z" fill="url(#nw-crystal-shine-arrow)" opacity="0.55"/>
+      </svg>
+    </div>
+    <div class="nw-cursor-hand">
+      <svg class="nw-cursor-svg" viewBox="0 0 22 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        ${cursorSvgDefs('hand')}
+        <path d="${handPath}" fill="rgba(124,58,237,0.28)"/>
+        <path d="${handPath}" fill="url(#nw-crystal-fill-hand)" stroke="url(#nw-crystal-edge-hand)" stroke-width="0.85" stroke-linejoin="round"/>
+      </svg>
+    </div>`;
   document.body.appendChild(cursor);
 
   const interactiveSelector =
     'a, button, summary, input, textarea, select, label, [role="button"], [role="menuitem"], .btn, .faq-question, .nav-toggle, .lang-option';
 
-  let targetX = window.innerWidth / 2;
-  let targetY = window.innerHeight / 2;
-  let currentX = targetX;
-  let currentY = targetY;
   let visible = false;
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const ease = reduceMotion ? 1 : 0.2;
-
-  function setPosition(x, y) {
-    cursor.style.left = `${x}px`;
-    cursor.style.top = `${y}px`;
-  }
-
-  function tick() {
-    if (ease === 1) {
-      currentX = targetX;
-      currentY = targetY;
-    } else {
-      currentX += (targetX - currentX) * ease;
-      currentY += (targetY - currentY) * ease;
-    }
-    setPosition(currentX, currentY);
-    requestAnimationFrame(tick);
-  }
 
   function show() {
     if (visible) return;
@@ -594,8 +607,8 @@ document.getElementById('contact-form')?.addEventListener('submit', (e) => {
   }
 
   document.addEventListener('mousemove', (e) => {
-    targetX = e.clientX;
-    targetY = e.clientY;
+    cursor.style.left = `${e.clientX}px`;
+    cursor.style.top = `${e.clientY}px`;
     show();
   }, { passive: true });
 
@@ -605,9 +618,5 @@ document.getElementById('contact-form')?.addEventListener('submit', (e) => {
 
   document.addEventListener('mousedown', () => cursor.classList.add('is-active'));
   document.addEventListener('mouseup', () => cursor.classList.remove('is-active'));
-
   document.addEventListener('mouseleave', hide);
-
-  setPosition(currentX, currentY);
-  requestAnimationFrame(tick);
 })();
