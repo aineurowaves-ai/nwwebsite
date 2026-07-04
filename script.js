@@ -1,4 +1,4 @@
-/* Neurowaves site — build 2026-07-03-v71 */
+/* Neurowaves site — build 2026-07-05-v75 */
 (function forceDarkTheme() {
   document.documentElement.setAttribute('data-theme', 'dark');
   try { localStorage.removeItem('nw-theme'); } catch (_) {}
@@ -541,3 +541,73 @@ document.getElementById('contact-form')?.addEventListener('submit', (e) => {
     e.target.reset();
   }, 3000);
 });
+
+/* ============ CRYSTAL CURSOR (desktop / fine pointer only) ============ */
+(function initCrystalCursor() {
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  document.documentElement.classList.add('nw-custom-cursor');
+
+  const cursor = document.createElement('div');
+  cursor.className = 'nw-cursor';
+  cursor.setAttribute('aria-hidden', 'true');
+  cursor.innerHTML = '<span class="nw-cursor-ring"></span><span class="nw-cursor-core"></span>';
+  document.body.appendChild(cursor);
+
+  const interactiveSelector =
+    'a, button, summary, input, textarea, select, label, [role="button"], [role="menuitem"], .btn, .faq-question, .nav-toggle, .lang-option';
+
+  let targetX = window.innerWidth / 2;
+  let targetY = window.innerHeight / 2;
+  let currentX = targetX;
+  let currentY = targetY;
+  let visible = false;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ease = reduceMotion ? 1 : 0.2;
+
+  function setPosition(x, y) {
+    cursor.style.left = `${x}px`;
+    cursor.style.top = `${y}px`;
+  }
+
+  function tick() {
+    if (ease === 1) {
+      currentX = targetX;
+      currentY = targetY;
+    } else {
+      currentX += (targetX - currentX) * ease;
+      currentY += (targetY - currentY) * ease;
+    }
+    setPosition(currentX, currentY);
+    requestAnimationFrame(tick);
+  }
+
+  function show() {
+    if (visible) return;
+    visible = true;
+    cursor.classList.add('is-visible');
+  }
+
+  function hide() {
+    visible = false;
+    cursor.classList.remove('is-visible', 'is-hover', 'is-active');
+  }
+
+  document.addEventListener('mousemove', (e) => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+    show();
+  }, { passive: true });
+
+  document.addEventListener('mouseover', (e) => {
+    cursor.classList.toggle('is-hover', !!e.target.closest(interactiveSelector));
+  });
+
+  document.addEventListener('mousedown', () => cursor.classList.add('is-active'));
+  document.addEventListener('mouseup', () => cursor.classList.remove('is-active'));
+
+  document.addEventListener('mouseleave', hide);
+
+  setPosition(currentX, currentY);
+  requestAnimationFrame(tick);
+})();
