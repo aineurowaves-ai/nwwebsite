@@ -171,8 +171,7 @@ body {
     height: min(400px, 96vw);
     top: 50%;
     left: 50%;
-    transform: translate3d(-50%, -50%, 0);
-    will-change: transform;
+    will-change: top;
   }
   .logo-3d-inner .logo-video {
     mix-blend-mode: normal;

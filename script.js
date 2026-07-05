@@ -1,4 +1,4 @@
-/* Neurowaves site — build 2026-07-06-v78 */
+/* Neurowaves site — build 2026-07-06-v79 */
 (function forceDarkTheme() {
   document.documentElement.setAttribute('data-theme', 'dark');
   try { localStorage.removeItem('nw-theme'); } catch (_) {}
@@ -361,12 +361,13 @@
 
     logo3d.style.display = '';
     logo3d.style.visibility = 'visible';
-    logo3d.style.top = '50%';
     logo3d.style.left = '50%';
     logo3d.style.opacity = '1';
-    logo3d.style.transform = `translate3d(-50%, calc(-50% + ${smoothOffsetY}px), 0)`;
+    logo3d.style.transform = '';
+    const smoothTop = 50 + (smoothOffsetY / window.innerHeight) * 100;
+    logo3d.style.top = `${smoothTop}%`;
     logoInner.style.opacity = '1';
-    logoInner.style.transform = `translate3d(-50%, -50%, 0) scale(${smoothScale})`;
+    logoInner.style.transform = `translate(-50%, -50%) scale(${smoothScale})`;
   }
 
   function updateLogo() {
@@ -398,6 +399,7 @@
     if (mobile) {
       logo3d.style.top = '50%';
       logo3d.style.left = '50%';
+      logo3d.style.transform = '';
     } else {
       logo3d.style.left = currentX + '%';
     }
