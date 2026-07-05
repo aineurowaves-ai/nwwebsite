@@ -815,10 +815,13 @@ img { max-width: 100%; display: block; }
   font-size: .75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   margin-bottom: 16px;
   background: var(--bg-glass);
   box-shadow: var(--glass-inset-shadow);
+  width: fit-content;
+  max-width: 100%;
+  line-height: 1.45;
 }
 
 .section-subtitle {
@@ -1043,21 +1046,48 @@ img { max-width: 100%; display: block; }
   z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  align-items: stretch;
+  width: min(100%, 320px);
+  margin-inline: auto;
+  gap: 12px;
 }
 
 .audit-price-box {
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  flex-direction: row;
   align-items: center;
-  gap: 4px;
-  padding: 16px 28px;
-  border-radius: var(--radius-md);
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 54px;
+  padding: 18px 40px;
+  border-radius: 50px;
   background: var(--bg-glass);
   border: 1px solid var(--border-glass);
-  box-shadow: var(--glass-inset-shadow);
-  backdrop-filter: blur(8px);
+  box-shadow: var(--btn-outline-shadow);
+  backdrop-filter: blur(14px) saturate(1);
+  -webkit-backdrop-filter: blur(14px) saturate(1);
+  box-sizing: border-box;
+}
+.audit-price-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.006) 34%, transparent 100%);
+  pointer-events: none;
+}
+.audit-price-box::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.018) 0%, transparent 45%);
+  pointer-events: none;
+  opacity: 0.35;
 }
 
 [data-theme="light"] .audit-price-box {
@@ -1065,24 +1095,31 @@ img { max-width: 100%; display: block; }
 }
 
 .audit-label {
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  position: relative;
+  z-index: 1;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .audit-amount {
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
-  font-weight: 800;
-  line-height: 1;
-  background: linear-gradient(135deg, #c084fc, #a855f7);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  position: relative;
+  z-index: 1;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text);
+  white-space: nowrap;
 }
 
 .audit-cta .btn-lg {
-  min-width: 220px;
+  width: 100%;
+  min-width: 0;
+  justify-content: center;
 }
 
 /* ============ INDUSTRY GRID ============ */
@@ -1214,21 +1251,68 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
   padding-top: 20px;
   border-top: 1px solid var(--border-glass);
   margin-top: auto;
 }
+
+.service-footer .service-price,
+.service-footer .btn-sm {
+  flex: 0 0 auto;
+  min-height: 42px;
+  height: 42px;
+  padding: 0 24px;
+  font-size: .85rem;
+  font-weight: 600;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.service-footer .btn-sm {
+  width: auto;
+}
 .service-price {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--accent-light);
-  padding: 8px 16px;
-  border: 1px solid var(--border-glass);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
   border-radius: 50px;
+  font-weight: 600;
+  font-size: .85rem;
+  color: var(--text);
   background: var(--bg-glass);
-  box-shadow: var(--glass-inset-shadow);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--btn-outline-shadow);
+  backdrop-filter: blur(14px) saturate(1);
+  -webkit-backdrop-filter: blur(14px) saturate(1);
   line-height: 1.2;
   white-space: nowrap;
+  text-align: center;
+}
+.service-price::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.006) 34%, transparent 100%);
+  pointer-events: none;
+}
+.service-price::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.018) 0%, transparent 45%);
+  pointer-events: none;
+  opacity: 0.35;
 }
 
 /* ============ CONTACT CHANNELS ============ */
@@ -1586,16 +1670,32 @@ img { max-width: 100%; display: block; }
   line-height: 1.65;
 }
 .pain-solution {
-  padding: 14px 16px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-glass);
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   font-size: .88rem;
   color: var(--text-muted);
-  border: 1px solid var(--border-glass);
-  box-shadow: var(--glass-inset-shadow);
   margin: 0;
+  line-height: 1.65;
 }
-.pain-solution strong { color: var(--accent-light); }
+.pain-solution strong {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-bottom: 10px;
+  padding: 5px 12px;
+  border-radius: 50px;
+  background: var(--bg-glass);
+  border: 1px solid rgba(192, 132, 252, 0.22);
+  box-shadow: var(--glass-inset-shadow);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+}
 .pain-visual {
   padding: 28px;
   display: flex;
@@ -2252,7 +2352,22 @@ img { max-width: 100%; display: block; }
   .quote-block { padding: 28px 20px; }
   .section-audit { padding: 56px 0; }
   .faq-question { font-size: 0.95rem; gap: 12px; padding: 16px 0; }
-  .service-footer { flex-wrap: wrap; }
+  .service-footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+  }
+  .service-footer .service-price,
+  .service-footer .btn-sm {
+    width: auto;
+    flex: none;
+  }
+  .section-tag {
+    font-size: .68rem;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+  }
   .btn { white-space: normal; }
   .blog-card .btn { align-self: stretch; text-align: center; }
   .about-buttons { flex-direction: column; }
@@ -2261,7 +2376,7 @@ img { max-width: 100%; display: block; }
   .contact-channel-card { padding: 22px; }
   .case-detail-block { padding: 22px; }
   .blog-article-cover { margin-bottom: 28px; }
-  .audit-cta .btn-lg { min-width: 0; width: 100%; max-width: 320px; }
+  .audit-cta .btn-lg { width: 100%; max-width: none; }
   .case-detail-cover { height: auto; aspect-ratio: 16 / 9; }
 }
 
@@ -2274,9 +2389,9 @@ img { max-width: 100%; display: block; }
   .industry-grid { grid-template-columns: 1fr; }
   .service-footer {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
+    gap: 14px;
   }
-  .service-footer .btn-sm { width: 100%; }
   .logo-text { font-size: 1.05rem; }
   .nav-logo { gap: 8px; }
   .logo-img { height: 28px; }
