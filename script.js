@@ -1,4 +1,4 @@
-/* Neurowaves site — build 2026-07-06-v79 */
+/* Neurowaves site — build 2026-07-06-v80 */
 (function forceDarkTheme() {
   document.documentElement.setAttribute('data-theme', 'dark');
   try { localStorage.removeItem('nw-theme'); } catch (_) {}
@@ -333,9 +333,9 @@
   function getLogoConfig() {
     const w = window.innerWidth;
     if (w <= 480) return { startX: 50, endX: 50, startScale: 0.78, endScale: 0.68 };
-    if (w <= 768) return { startX: 50, endX: 50.5, startScale: 0.88, endScale: 0.75 };
-    if (w <= 1024) return { startX: 55, endX: 50.5, startScale: 0.78, endScale: 0.55 };
-    return { startX: 75, endX: 50.5, startScale: 1, endScale: 0.7 };
+    if (w <= 768) return { startX: 50, endX: 50, startScale: 0.88, endScale: 0.75 };
+    if (w <= 1024) return { startX: 55, endX: 50, startScale: 0.78, endScale: 0.55 };
+    return { startX: 75, endX: 50, startScale: 1, endScale: 0.7 };
   }
 
   function getBaseOpacity() {
@@ -363,11 +363,13 @@
     logo3d.style.visibility = 'visible';
     logo3d.style.left = '50%';
     logo3d.style.opacity = '1';
-    logo3d.style.transform = '';
+    logo3d.style.transform = 'translateX(-50%)';
     const smoothTop = 50 + (smoothOffsetY / window.innerHeight) * 100;
     logo3d.style.top = `${smoothTop}%`;
+    logoInner.style.marginLeft = '0';
+    logoInner.style.marginTop = '0';
     logoInner.style.opacity = '1';
-    logoInner.style.transform = `translate(-50%, -50%) scale(${smoothScale})`;
+    logoInner.style.transform = `translateY(-50%) scale(${smoothScale})`;
   }
 
   function updateLogo() {
@@ -393,14 +395,19 @@
     logo3d.style.visibility = 'visible';
     logo3d.style.top = '';
 
-    logoInner.style.transform = `translate(-50%, -50%) scale(${currentScale})`;
+    logoInner.style.marginLeft = '0';
+    logoInner.style.marginTop = '0';
+    logoInner.style.transform = mobile
+      ? `translateY(-50%) scale(${currentScale})`
+      : `translate(-50%, -50%) scale(${currentScale})`;
     logoInner.style.opacity = mobile ? '1' : String(fade);
     logo3d.style.opacity = mobile ? '1' : String(fade);
     if (mobile) {
       logo3d.style.top = '50%';
       logo3d.style.left = '50%';
-      logo3d.style.transform = '';
+      logo3d.style.transform = 'translateX(-50%)';
     } else {
+      logo3d.style.transform = '';
       logo3d.style.left = currentX + '%';
     }
   }
