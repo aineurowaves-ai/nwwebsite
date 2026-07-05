@@ -1,4 +1,4 @@
-/* Neurowaves site — build 2026-07-05-v77 */
+/* Neurowaves site — build 2026-07-06-v78 */
 (function forceDarkTheme() {
   document.documentElement.setAttribute('data-theme', 'dark');
   try { localStorage.removeItem('nw-theme'); } catch (_) {}
@@ -122,6 +122,9 @@
   const logoFallback = logoInner.querySelector('.logo-fallback');
   let scrollY = 0;
   let mobileStartTop = 76;
+  let mobileStartOffsetY = 0;
+  let smoothOffsetY = 0;
+  let smoothScale = 0.8;
   let canvas = null;
   let canvasCtx = null;
   let rafId = 0;
@@ -135,6 +138,9 @@
   const isHomeMobileHero = () => !isInnerPage && isMobile();
 
   function easeInOutSine(x) { return -(Math.cos(Math.PI * x) - 1) / 2; }
+  function easeOutCubic(x) { return 1 - Math.pow(1 - x, 3); }
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function isLightTheme() {
     return document.documentElement.getAttribute('data-theme') === 'light';
@@ -295,22 +301,32 @@
     if (!isHomeMobileHero() || !heroEl) return;
     const content = heroEl.querySelector('.hero-content');
     const w = window.innerWidth;
+    const vh = window.innerHeight;
     const startScale = w <= 480 ? 0.7 : 0.8;
     const logoSize = logo3d.offsetWidth || (w <= 480 ? 340 : 400);
     const logoHalf = (logoSize * startScale) / 2;
     const gap = 28;
+
     if (content) {
-      const bottom = content.getBoundingClientRect().bottom;
-      mobileStartTop = ((bottom + gap + logoHalf) / window.innerHeight) * 100;
+      const heroDocTop = heroEl.getBoundingClientRect().top + window.scrollY;
+      const contentBottomDoc = heroDocTop + content.offsetTop + content.offsetHeight;
+      const logoCenterY = contentBottomDoc + gap + logoHalf;
+      mobileStartTop = (logoCenterY / vh) * 100;
       mobileStartTop = Math.min(Math.max(mobileStartTop, 68), 88);
     } else {
       mobileStartTop = 80;
+    }
+
+    mobileStartOffsetY = ((mobileStartTop - 50) / 100) * vh;
+    if (window.scrollY < 1) {
+      smoothOffsetY = mobileStartOffsetY;
+      smoothScale = startScale;
     }
   }
 
   function getHomeMobileScrollProgress() {
     if (!heroEl) return 1;
-    const range = Math.max(heroEl.offsetHeight - window.innerHeight * 0.15, window.innerHeight * 0.55);
+    const range = Math.max(heroEl.offsetHeight - window.innerHeight * 0.12, window.innerHeight * 0.72);
     return Math.min(scrollY / range, 1);
   }
 
@@ -333,27 +349,37 @@
     return 1;
   }
 
+  function applyHomeMobileLogo(eased, w) {
+    const startScale = w <= 480 ? 0.7 : 0.8;
+    const endScale = w <= 480 ? 0.66 : 0.74;
+    const targetOffsetY = mobileStartOffsetY * (1 - eased);
+    const targetScale = startScale + (endScale - startScale) * eased;
+    const follow = prefersReducedMotion ? 1 : 0.16;
+
+    smoothOffsetY += (targetOffsetY - smoothOffsetY) * follow;
+    smoothScale += (targetScale - smoothScale) * follow;
+
+    logo3d.style.display = '';
+    logo3d.style.visibility = 'visible';
+    logo3d.style.top = '50%';
+    logo3d.style.left = '50%';
+    logo3d.style.opacity = '1';
+    logo3d.style.transform = `translate3d(-50%, calc(-50% + ${smoothOffsetY}px), 0)`;
+    logoInner.style.opacity = '1';
+    logoInner.style.transform = `translate3d(-50%, -50%, 0) scale(${smoothScale})`;
+  }
+
   function updateLogo() {
     const mobile = isMobile();
     const w = window.innerWidth;
 
     if (isHomeMobileHero()) {
-      if (scrollY < 2) recalcMobileStartTop();
-      const eased = easeInOutSine(getHomeMobileScrollProgress());
-      const startScale = w <= 480 ? 0.7 : 0.8;
-      const endScale = w <= 480 ? 0.66 : 0.74;
-      const currentTop = mobileStartTop + (50 - mobileStartTop) * eased;
-      const currentScale = startScale + (endScale - startScale) * eased;
-
-      logo3d.style.display = '';
-      logo3d.style.visibility = 'visible';
-      logo3d.style.top = currentTop + '%';
-      logo3d.style.left = '50%';
-      logo3d.style.opacity = '1';
-      logoInner.style.opacity = '1';
-      logoInner.style.transform = `translate(-50%, -50%) scale(${currentScale})`;
+      const eased = easeOutCubic(getHomeMobileScrollProgress());
+      applyHomeMobileLogo(eased, w);
       return;
     }
+
+    logo3d.style.transform = '';
 
     const progress = Math.min(scrollY / (heroHeight() * 1.2), 1);
     const eased = easeInOutSine(progress);
@@ -381,34 +407,49 @@
   setupMobileCanvas();
   recalcMobileStartTop();
 
-  window.addEventListener('scroll', () => {
+  function onScroll() {
     scrollY = window.scrollY;
-    requestAnimationFrame(updateLogo);
-  }, { passive: true });
+    updateLogo();
+  }
 
-  window.addEventListener('resize', () => {
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  function onResize() {
     recalcMobileStartTop();
     setupMobileCanvas();
     resizeCanvas();
-    requestAnimationFrame(updateLogo);
-  });
+    updateLogo();
+  }
+
+  window.addEventListener('resize', onResize);
 
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(() => {
       recalcMobileStartTop();
-      requestAnimationFrame(updateLogo);
+      updateLogo();
     });
   }
 
   window.addEventListener('load', () => {
     recalcMobileStartTop();
-    requestAnimationFrame(updateLogo);
+    updateLogo();
   });
 
   requestAnimationFrame(() => {
     recalcMobileStartTop();
     updateLogo();
   });
+
+  if (isHomeMobileHero() && !prefersReducedMotion) {
+    function homeLogoTick() {
+      if (isHomeMobileHero()) {
+        const eased = easeOutCubic(getHomeMobileScrollProgress());
+        applyHomeMobileLogo(eased, window.innerWidth);
+      }
+      requestAnimationFrame(homeLogoTick);
+    }
+    requestAnimationFrame(homeLogoTick);
+  }
 })();
 
 /* ============ SUBTLE MOUSE PARALLAX ON LOGO ============ */
