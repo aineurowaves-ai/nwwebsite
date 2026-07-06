@@ -51,6 +51,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://neurowaves.ai/cases/uasys/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://neurowaves.ai/cases/favoryt/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://neurowaves.ai/blog/where-inquiries-die/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

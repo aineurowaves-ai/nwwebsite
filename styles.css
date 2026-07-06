@@ -1862,6 +1862,16 @@ img { max-width: 100%; display: block; }
     linear-gradient(135deg, rgba(18, 16, 42, 0.2), rgba(10, 10, 16, 0.35)),
     url('assets/case-novatrack.png') center / cover no-repeat;
 }
+.case-img--uasys::before {
+  background:
+    linear-gradient(135deg, rgba(22, 14, 40, 0.2), rgba(10, 10, 16, 0.35)),
+    url('assets/case-uasys.png?v=2') center / cover no-repeat;
+}
+.case-img--favoryt::before {
+  background:
+    linear-gradient(135deg, rgba(28, 12, 12, 0.2), rgba(10, 10, 16, 0.35)),
+    url('assets/case-favoryt.png') center / cover no-repeat;
+}
 .case-body { padding: 28px; }
 .case-badge {
   display: inline-block;
