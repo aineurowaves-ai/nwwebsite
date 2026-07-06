@@ -1842,10 +1842,10 @@ img { max-width: 100%; display: block; }
 .case-img span {
   display: none;
 }
-.case-img--sion::before {
+.case-img--vitalis::before {
   background:
     linear-gradient(135deg, rgba(26, 15, 46, 0.2), rgba(13, 10, 20, 0.35)),
-    url('assets/case-sion.png') center / cover no-repeat;
+    url('assets/case-vitalis-clinic.png') center / cover no-repeat;
 }
 .case-img--hotel::before {
   background:
@@ -1857,10 +1857,10 @@ img { max-width: 100%; display: block; }
     linear-gradient(135deg, rgba(24, 18, 43, 0.2), rgba(11, 11, 16, 0.35)),
     url('assets/case-msp-intech.png') center / cover no-repeat;
 }
-.case-img--xtrans::before {
+.case-img--novatrack::before {
   background:
     linear-gradient(135deg, rgba(18, 16, 42, 0.2), rgba(10, 10, 16, 0.35)),
-    url('assets/case-x-trans.png') center / cover no-repeat;
+    url('assets/case-novatrack.png') center / cover no-repeat;
 }
 .case-body { padding: 28px; }
 .case-badge {
