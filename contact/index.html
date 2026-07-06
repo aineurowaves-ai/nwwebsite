@@ -83,7 +83,10 @@
   <section class="section section-cta" id="contact">
     <div class="container">
       <div class="contact-glass">
-        <form class="contact-form" id="contact-form">
+        <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="64a1e2c9-10b2-4a98-8030-c4b567b7fdb2">
+          <input type="hidden" name="subject" value="New inquiry — Neurowaves website">
+          <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="form-row">
             <input type="text" name="name" data-i18n-placeholder="form.name" placeholder="Your name" required>
             <input type="email" name="email" placeholder="Email" required>
@@ -231,7 +234,7 @@
     </div>
   </footer>
 
-  <script src="/i18n.js?v=28" defer></script>
-  <script src="/script.js?v=80" defer></script>
+  <script src="/i18n.js?v=34" defer></script>
+  <script src="/script.js?v=81" defer></script>
 </body>
 </html>

@@ -1135,6 +1135,23 @@ img { max-width: 100%; display: block; }
 /* ============ SERVICES ============ */
 .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 
+.service-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--radius);
+}
+.service-card-link .service-card {
+  height: 100%;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+.service-card-link:hover .service-card {
+  transform: translateY(-4px);
+}
+.service-card-link:hover .service-img::before {
+  transform: scale(1.04);
+}
+
 .service-card {
   padding: 0;
   overflow: hidden;
@@ -1504,6 +1521,39 @@ img { max-width: 100%; display: block; }
   margin: 8px 0;
 }
 
+.service-footer .service-card-more {
+  pointer-events: none;
+}
+
+/* ============ SERVICE DETAIL ============ */
+.service-hero .hero-content { text-align: left; max-width: 760px; }
+.service-detail { max-width: 900px; margin: 0 auto; }
+.service-detail-cover {
+  height: 280px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 32px;
+  border: 1px solid var(--border-glass);
+}
+.service-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+.service-detail-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 28px 32px;
+}
+.service-detail-cta .service-price {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--accent-light);
+}
+
 /* ============ PROCESS ============ */
 .process-steps {
   display: grid;
@@ -1864,13 +1914,13 @@ img { max-width: 100%; display: block; }
 }
 .case-img--uasys::before {
   background:
-    linear-gradient(135deg, rgba(22, 14, 40, 0.2), rgba(10, 10, 16, 0.35)),
-    url('assets/case-uasys.png?v=2') center / cover no-repeat;
+    linear-gradient(135deg, rgba(14, 20, 42, 0.2), rgba(10, 10, 16, 0.35)),
+    url('assets/case-uasys.png?v=3') center / cover no-repeat;
 }
 .case-img--favoryt::before {
   background:
     linear-gradient(135deg, rgba(28, 12, 12, 0.2), rgba(10, 10, 16, 0.35)),
-    url('assets/case-favoryt.png') center / cover no-repeat;
+    url('assets/case-favoryt.png?v=2') center / cover no-repeat;
 }
 .case-body { padding: 28px; }
 .case-badge {

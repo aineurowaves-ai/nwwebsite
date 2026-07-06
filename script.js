@@ -575,21 +575,49 @@ document.querySelectorAll(
   observer.observe(el);
 });
 
-/* ============ FORM SUBMIT ============ */
-document.getElementById('contact-form')?.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const btn = e.target.querySelector('button[type="submit"]');
-  const lang = window.NW_I18N?.getLang() || 'en';
-  const defaultLabel = window.NW_I18N?.t(lang, 'form.submit') || btn.textContent;
-  btn.textContent = window.NW_I18N?.t(lang, 'form.success') || 'Request received!';
-  btn.style.pointerEvents = 'none';
-  btn.style.opacity = '0.7';
-  setTimeout(() => {
-    btn.textContent = defaultLabel;
-    btn.style.pointerEvents = '';
-    btn.style.opacity = '';
-    e.target.reset();
-  }, 3000);
+/* ============ FORM SUBMIT (Web3Forms) ============ */
+document.querySelectorAll('.contact-form').forEach((form) => {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    if (!btn || btn.disabled) return;
+
+    const lang = window.NW_I18N?.getLang() || 'en';
+    const defaultLabel = window.NW_I18N?.t(lang, 'form.submit') || btn.textContent;
+    const sendingLabel = window.NW_I18N?.t(lang, 'form.sending') || 'Sending...';
+
+    btn.disabled = true;
+    btn.textContent = sendingLabel;
+    btn.style.opacity = '0.7';
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      const data = await response.json();
+
+      if (data.success) {
+        btn.textContent = window.NW_I18N?.t(lang, 'form.success') || 'Thanks — we\'ll be in touch!';
+        form.reset();
+        setTimeout(() => {
+          btn.textContent = defaultLabel;
+          btn.disabled = false;
+          btn.style.opacity = '';
+        }, 4000);
+      } else {
+        throw new Error(data.message || 'Submit failed');
+      }
+    } catch {
+      btn.textContent = window.NW_I18N?.t(lang, 'form.error') || 'Could not send — please try again or email us.';
+      btn.disabled = false;
+      btn.style.opacity = '';
+      setTimeout(() => {
+        btn.textContent = defaultLabel;
+      }, 5000);
+    }
+  });
 });
 
 /* ============ CRYSTAL CURSOR (desktop / fine pointer only) ============ */
