@@ -665,6 +665,13 @@ document.querySelectorAll('.contact-form').forEach((form) => {
       const data = await response.json();
 
       if (data.success) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'form_submit_success',
+          form_name: 'contact',
+          form_location: /^\/contact\/?$/.test(window.location.pathname) ? 'contact_page' : 'homepage',
+          form_language: lang,
+        });
         btn.textContent = window.NW_I18N?.t(lang, 'form.success') || 'Thanks — we\'ll be in touch!';
         form.reset();
         setTimeout(() => {
