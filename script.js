@@ -496,6 +496,66 @@
   tick();
 })();
 
+/* ============ SERVICES NAV DROPDOWN ============ */
+const SERVICE_NAV_ITEMS = [
+  { href: '/services/', key: 'nav.servicesAll' },
+  { href: '/services/ai-chat-bots/', key: 'services.s1title' },
+  { href: '/services/ai-voice-bot/', key: 'services.s2title' },
+  { href: '/services/google-ai-promotion/', key: 'services.s3title' },
+  { href: '/services/crm-implementation/', key: 'services.s4title' },
+];
+
+function initServicesNavDropdown() {
+  const navLinks = document.getElementById('nav-links');
+  if (!navLinks || navLinks.querySelector('.nav-services-dropdown')) return;
+
+  const servicesLink = navLinks.querySelector(':scope > a[href="/services/"]');
+  if (!servicesLink) return;
+
+  const path = window.location.pathname.replace(/\/$/, '') || '/';
+  const dropdown = document.createElement('div');
+  dropdown.className = 'nav-dropdown nav-services-dropdown';
+
+  const trigger = document.createElement('a');
+  trigger.href = '/services/';
+  trigger.className = 'nav-dropdown-trigger';
+  if (servicesLink.classList.contains('active') || path === '/services' || path.startsWith('/services/')) {
+    trigger.classList.add('active');
+  }
+
+  const label = document.createElement('span');
+  label.setAttribute('data-i18n', 'nav.services');
+  label.textContent = servicesLink.textContent;
+  trigger.append(label);
+
+  const chevron = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  chevron.setAttribute('class', 'nav-dropdown-chevron');
+  chevron.setAttribute('viewBox', '0 0 24 24');
+  chevron.setAttribute('aria-hidden', 'true');
+  chevron.innerHTML = '<path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>';
+  trigger.append(chevron);
+
+  const menu = document.createElement('div');
+  menu.className = 'nav-dropdown-menu';
+  menu.setAttribute('role', 'menu');
+
+  SERVICE_NAV_ITEMS.forEach((item) => {
+    const link = document.createElement('a');
+    const itemPath = item.href.replace(/\/$/, '') || '/';
+    link.href = item.href;
+    link.setAttribute('role', 'menuitem');
+    link.setAttribute('data-i18n', item.key);
+    link.textContent = window.NW_I18N?.t(window.NW_I18N?.getLang() || 'en', item.key) || item.key;
+    if (path === itemPath || (itemPath !== '/services' && path.startsWith(itemPath))) {
+      link.classList.add('active');
+    }
+    menu.append(link);
+  });
+
+  dropdown.append(trigger, menu);
+  servicesLink.replaceWith(dropdown);
+}
+
 /* ============ THEME & LANGUAGE (nav) ============ */
 function initNavPreferences() {
   const root = document.documentElement;
@@ -524,26 +584,32 @@ function initNavPreferences() {
   });
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initNavPreferences);
-} else {
+function initNav() {
+  initServicesNavDropdown();
   initNavPreferences();
+
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  navToggle?.addEventListener('click', () => {
+    navLinks?.classList.toggle('active');
+  });
+  navLinks?.addEventListener('click', (e) => {
+    if (e.target.closest('a')) navLinks.classList.remove('active');
+  });
+
+  window.NW_I18N?.applyLang(window.NW_I18N?.getLang() || localStorage.getItem('nw-lang') || 'en');
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initNav);
+} else {
+  initNav();
 }
 
 /* ============ NAVBAR SCROLL ============ */
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 50);
-});
-
-/* ============ MOBILE MENU ============ */
-const navToggle = document.getElementById('nav-toggle');
-const navLinks = document.getElementById('nav-links');
-navToggle?.addEventListener('click', () => {
-  navLinks?.classList.toggle('active');
-});
-navLinks?.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => navLinks.classList.remove('active'));
 });
 
 /* ============ FAQ ACCORDION ============ */
