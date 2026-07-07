@@ -2,6 +2,7 @@
 (function () {
   const LANGS = ['en', 'de', 'fr', 'es', 'uk'];
   const LANG_LABELS = { en: 'EN', de: 'DE', fr: 'FR', es: 'ES', uk: 'UA' };
+  const LANG_NAMES = { en: 'English', de: 'Deutsch', fr: 'Français', es: 'Español', uk: 'Українська' };
   const META = {
     en: { title: "Neurowaves — IT, AI, automation & marketing for growing businesses", description: "Neurowaves delivers IT projects, AI implementation, workflow automation, and marketing — wired into one system so your business runs faster and loses fewer leads." },
     uk: { title: "Neurowaves — IT, AI, автоматизація та маркетинг для бізнесу", description: "Neurowaves реалізує IT-проєкти, впроваджує AI, автоматизує процеси та веде маркетинг — в одній системі, щоб бізнес працював швидше й не губив звернення." },
@@ -1790,7 +1791,11 @@
     });
     const cur = document.getElementById('lang-current');
     if (cur) cur.textContent = LANG_LABELS[lang];
-    document.querySelectorAll('.lang-option').forEach((btn) => btn.classList.toggle('active', btn.dataset.lang === lang));
+    document.querySelectorAll('.lang-option').forEach((btn) => {
+      const code = btn.dataset.lang;
+      if (code && LANG_NAMES[code]) btn.textContent = LANG_NAMES[code];
+      btn.classList.toggle('active', code === lang);
+    });
     window.dispatchEvent(new CustomEvent('nw:lang', { detail: { lang } }));
   }
   window.NW_I18N = { LANGS, LANG_LABELS, META, STR, applyLang, t, getLang: () => localStorage.getItem('nw-lang') || 'en' };
