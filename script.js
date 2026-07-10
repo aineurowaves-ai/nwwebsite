@@ -516,24 +516,35 @@ function initServicesNavDropdown() {
   const dropdown = document.createElement('div');
   dropdown.className = 'nav-dropdown nav-services-dropdown';
 
-  const trigger = document.createElement('a');
-  trigger.href = '/services/';
-  trigger.className = 'nav-dropdown-trigger';
+  const row = document.createElement('div');
+  row.className = 'nav-dropdown-row';
+
+  const labelLink = document.createElement('a');
+  labelLink.href = '/services/';
+  labelLink.className = 'nav-dropdown-label';
   if (servicesLink.classList.contains('active') || path === '/services' || path.startsWith('/services/')) {
-    trigger.classList.add('active');
+    labelLink.classList.add('active');
   }
 
   const label = document.createElement('span');
   label.setAttribute('data-i18n', 'nav.services');
   label.textContent = servicesLink.textContent;
-  trigger.append(label);
+  labelLink.append(label);
+
+  const toggleBtn = document.createElement('button');
+  toggleBtn.type = 'button';
+  toggleBtn.className = 'nav-dropdown-toggle';
+  toggleBtn.setAttribute('aria-expanded', 'false');
+  toggleBtn.setAttribute('aria-label', 'Toggle services menu');
 
   const chevron = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   chevron.setAttribute('class', 'nav-dropdown-chevron');
   chevron.setAttribute('viewBox', '0 0 24 24');
   chevron.setAttribute('aria-hidden', 'true');
   chevron.innerHTML = '<path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>';
-  trigger.append(chevron);
+  toggleBtn.append(chevron);
+
+  row.append(labelLink, toggleBtn);
 
   const menu = document.createElement('div');
   menu.className = 'nav-dropdown-menu';
@@ -552,8 +563,30 @@ function initServicesNavDropdown() {
     menu.append(link);
   });
 
-  dropdown.append(trigger, menu);
+  dropdown.append(row, menu);
   servicesLink.replaceWith(dropdown);
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const isOpen = dropdown.classList.toggle('is-open');
+    toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!dropdown.classList.contains('is-open')) return;
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove('is-open');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  navLinks.addEventListener('click', (e) => {
+    if (e.target.closest('.nav-dropdown-menu a')) {
+      dropdown.classList.remove('is-open');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
 }
 
 /* ============ THEME & LANGUAGE (nav) ============ */
@@ -592,6 +625,11 @@ function initNav() {
   const navLinks = document.getElementById('nav-links');
   navToggle?.addEventListener('click', () => {
     navLinks?.classList.toggle('active');
+    const openDropdown = navLinks?.querySelector('.nav-services-dropdown.is-open');
+    if (openDropdown) {
+      openDropdown.classList.remove('is-open');
+      openDropdown.querySelector('.nav-dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+    }
   });
   navLinks?.addEventListener('click', (e) => {
     if (e.target.closest('a')) navLinks.classList.remove('active');
