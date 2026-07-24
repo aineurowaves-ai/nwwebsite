@@ -528,6 +528,19 @@
   line-height: 1.65;
   color: var(--text-muted);
 }
+.svc-pricing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 22px;
+}
+.svc-pricing-actions .btn {
+  flex: 1 1 calc(50% - 5px);
+  min-width: 118px;
+  justify-content: center;
+  text-align: center;
+}
 @media (max-width: 768px) {
   .svc-pricing-grid { grid-template-columns: 1fr; }
   .svc-pricing-amount { font-size: 2rem; }

@@ -28,7 +28,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css?v=118">
-  <link rel="stylesheet" href="/svc-landing.css?v=11">
+  <link rel="stylesheet" href="/svc-landing.css?v=12">
   <style>.navbar .lang-details:not([open]) .lang-menu { display: none !important; }</style>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
@@ -184,6 +184,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <p class="svc-pricing-amount" data-i18n="services.s3priceAdsAmount">$500<span>/mo</span></p>
               <p class="svc-pricing-budget" data-i18n="services.s3priceAdsBudget">+ ad spend from $1,000 / month</p>
               <p class="svc-pricing-copy" data-i18n="services.s3priceAdsCopy">Campaign setup, optimization, tracking, and reporting — so your site can show first in search while the budget works for real inquiries.</p>
+              <div class="svc-pricing-actions">
+                <a href="#svc-contact" class="btn btn-primary btn-sm" data-svc-pricing-cta data-intent="buy" data-service="ads" data-i18n="services.s3priceBuy">Buy service</a>
+                <a href="#svc-contact" class="btn btn-outline btn-sm" data-svc-pricing-cta data-intent="contact" data-service="ads" data-i18n="services.s3priceContact">Contact us</a>
+              </div>
             </div>
           </article>
           <article class="svc-pricing-card glass fade-in">
@@ -194,6 +198,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <p class="svc-pricing-amount" data-i18n="services.s3priceSeoAmount">$350<span>/mo</span></p>
               <p class="svc-pricing-budget" data-i18n="services.s3priceSeoBudget">Depends on site scale and functionality</p>
               <p class="svc-pricing-copy" data-i18n="services.s3priceSeoCopy">Technical SEO, on-page work, and visibility improvements tailored to your pages, CMS, and market — priced after we see the scope.</p>
+              <div class="svc-pricing-actions">
+                <a href="#svc-contact" class="btn btn-primary btn-sm" data-svc-pricing-cta data-intent="buy" data-service="seo" data-i18n="services.s3priceBuy">Buy service</a>
+                <a href="#svc-contact" class="btn btn-outline btn-sm" data-svc-pricing-cta data-intent="contact" data-service="seo" data-i18n="services.s3priceContact">Contact us</a>
+              </div>
             </div>
           </article>
         </div>
@@ -373,8 +381,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="contact-glass">
           <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="64a1e2c9-10b2-4a98-8030-c4b567b7fdb2">
-            <input type="hidden" name="subject" value="Service inquiry — Google Ads & SEO">
+            <input type="hidden" name="subject" value="Service inquiry — Google Ads & SEO" id="svc-contact-subject">
             <input type="hidden" name="from_name" value="Neurowaves Website">
+            <input type="hidden" name="pricing_intent" id="svc-contact-intent" value="">
+            <input type="hidden" name="pricing_service" id="svc-contact-service" value="">
             <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="form-row">
               <input type="text" name="name" required data-i18n-placeholder="form.name" placeholder="Your name">
@@ -431,8 +441,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <script src="/cases-catalog-live.js?v=1" defer></script>
   <script src="/i18n.js?v=43" defer></script>
-  <script src="/services-landing-i18n-partial.js?v=7" defer></script>
+  <script src="/services-landing-i18n-partial.js?v=8" defer></script>
   <script src="/script.js?v=86" defer></script>
-  <script src="/svc-landing.js?v=2" defer></script>
+  <script src="/svc-landing.js?v=3" defer></script>
 </body>
 </html>

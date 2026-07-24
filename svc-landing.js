@@ -71,10 +71,61 @@
     render();
   }
 
+  function initSvcPricingCtas() {
+    const form = document.querySelector('#svc-contact .contact-form');
+    if (!form) return;
+
+    const subjectEl = document.getElementById('svc-contact-subject');
+    const intentEl = document.getElementById('svc-contact-intent');
+    const serviceEl = document.getElementById('svc-contact-service');
+    const messageEl = form.querySelector('textarea[name="message"]');
+
+    const serviceLabel = {
+      ads: 'Google Ads',
+      seo: 'SEO',
+    };
+
+    document.querySelectorAll('[data-svc-pricing-cta]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const intent = btn.getAttribute('data-intent') || 'contact';
+        const service = btn.getAttribute('data-service') || '';
+        const label = serviceLabel[service] || service || 'Google Ads & SEO';
+        const lang = window.NW_I18N?.getLang() || 'en';
+        const msgKey = intent === 'buy'
+          ? (service === 'seo' ? 'services.s3priceBuyMsgSeo' : 'services.s3priceBuyMsgAds')
+          : (service === 'seo' ? 'services.s3priceContactMsgSeo' : 'services.s3priceContactMsgAds');
+        const fallbackMsg = intent === 'buy'
+          ? `I want to get started with ${label}.`
+          : `I'd like to discuss ${label} for my business.`;
+        const message = window.NW_I18N?.t(lang, msgKey) || fallbackMsg;
+
+        if (subjectEl) {
+          subjectEl.value = intent === 'buy'
+            ? `Buy request — ${label}`
+            : `Contact request — ${label}`;
+        }
+        if (intentEl) intentEl.value = intent;
+        if (serviceEl) serviceEl.value = service;
+        if (messageEl && !messageEl.value.trim()) messageEl.value = message;
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: intent === 'buy' ? 'pricing_buy_click' : 'pricing_contact_click',
+          pricing_intent: intent,
+          pricing_service: service,
+          pricing_service_label: label,
+          page_path: window.location.pathname,
+          form_language: lang,
+        });
+      });
+    });
+  }
+
   function boot() {
     if (!document.body.classList.contains('svc-landing-page')) return;
     initSvcStickyCta();
     initSvcCasesCarousel();
+    initSvcPricingCtas();
   }
 
   if (document.readyState === 'loading') {
