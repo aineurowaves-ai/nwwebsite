@@ -1065,7 +1065,9 @@
   width: auto;
   height: 30px;
   max-width: none;
+  margin: 0 auto;
   object-fit: contain;
+  object-position: center;
 }
 @keyframes svc-tech-marquee-scroll {
   from { transform: translateX(0); }
