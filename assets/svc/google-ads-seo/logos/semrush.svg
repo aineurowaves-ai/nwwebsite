@@ -1,5 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 36" fill="none" role="img" aria-label="SEMrush">
-  <rect x="9" y="9" width="18" height="18" rx="4" stroke="#FF622D" stroke-width="1.5"/>
-  <path d="M14 22V14h4.5a3 3 0 0 1 0 6H14" stroke="#FF622D" stroke-width="1.5" stroke-linejoin="round"/>
-  <text x="40" y="23" fill="#F5F5F5" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600">SEMrush</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 36" fill="none" role="img" aria-label="SEMrush">
+  <g transform="translate(4 4)">
+    <rect x="2" y="2" width="24" height="24" rx="6" fill="#FF622D"/>
+    <path d="M10 20V10h5a3.5 3.5 0 0 1 0 7h-5" stroke="#fff" stroke-width="2" stroke-linejoin="round" fill="none"/>
+  </g>
+  <text x="46" y="23" fill="#F5F5F5" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600" letter-spacing="0.01em">SEMrush</text>
 </svg>

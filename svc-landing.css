@@ -1022,9 +1022,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 168px;
+  min-width: 0;
+  width: max-content;
   height: 64px;
-  padding: 0 20px;
+  padding: 0 18px;
   border-radius: 14px;
   background: rgba(168, 85, 247, .06);
   border: 1px solid rgba(168, 85, 247, .22);
@@ -1039,8 +1040,8 @@
 .svc-tech-logo-pill img {
   display: block;
   width: auto;
-  height: 28px;
-  max-width: 140px;
+  height: 30px;
+  max-width: none;
   object-fit: contain;
 }
 @keyframes svc-tech-marquee-scroll {

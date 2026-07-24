@@ -1,5 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196 36" fill="none" role="img" aria-label="Google Tag Manager">
-  <rect x="8" y="8" width="20" height="20" rx="5" stroke="#4285F4" stroke-width="1.5"/>
-  <path d="M14 18h12M18 14v8" stroke="#34A853" stroke-width="1.6" stroke-linecap="round"/>
-  <text x="40" y="23" fill="#F5F5F5" font-family="Inter,Segoe UI,sans-serif" font-size="13" font-weight="600">Google Tag Manager</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168 36" fill="none" role="img" aria-label="Tag Manager">
+  <g transform="translate(4 4)">
+    <rect x="2" y="2" width="24" height="24" rx="6" fill="#4285F4"/>
+    <path d="M8 14h12M14 8v12" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+  </g>
+  <text x="46" y="23" fill="#F5F5F5" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600" letter-spacing="0.01em">Tag Manager</text>
 </svg>

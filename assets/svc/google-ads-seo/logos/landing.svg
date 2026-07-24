@@ -1,5 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168 36" fill="none" role="img" aria-label="Landing pages">
-  <rect x="10" y="8" width="16" height="20" rx="2.5" stroke="#C084FC" stroke-width="1.4"/>
-  <path d="M13 13h10M13 17h10M13 21h6" stroke="#A855F7" stroke-width="1.3" stroke-linecap="round"/>
-  <text x="40" y="23" fill="#F5F5F5" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600">Landing pages</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 36" fill="none" role="img" aria-label="Landing pages">
+  <g transform="translate(4 4)">
+    <rect x="2" y="2" width="24" height="24" rx="6" fill="#8B5CF6"/>
+    <rect x="8" y="6.5" width="12" height="15" rx="1.5" stroke="#fff" stroke-width="1.6" fill="none"/>
+    <path d="M10.5 11h7M10.5 14h7M10.5 17h4" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+  </g>
+  <text x="46" y="23" fill="#F5F5F5" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600" letter-spacing="0.01em">Landing pages</text>
 </svg>
