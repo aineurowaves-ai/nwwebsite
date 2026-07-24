@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 36" fill="none" role="img" aria-label="Node.js">
+  <path d="M18 6.5 27.5 12v11L18 28.5 8.5 23V12L18 6.5Z" stroke="#86EFAC" stroke-width="1.5"/>
+  <text x="40" y="23" fill="#F5F5F5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600">Node.js</text>
+</svg>

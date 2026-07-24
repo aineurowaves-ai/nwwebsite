@@ -118,6 +118,7 @@
 
   const heroEl = document.querySelector('.hero:not(.page-hero)') || document.querySelector('.hero');
   const isInnerPage = !!document.querySelector('.hero.page-hero');
+  const isSvcLanding = document.body.classList.contains('svc-landing-page');
   const logoVideo = logoInner.querySelector('.logo-video');
   const logoFallback = logoInner.querySelector('.logo-fallback');
   let scrollY = 0;
@@ -332,6 +333,13 @@
 
   function getLogoConfig() {
     const w = window.innerWidth;
+    if (isSvcLanding) {
+      if (w <= 480) return { startX: 50, endX: 50, startY: 50, endY: 50, startScale: 0.42, endScale: 0.38 };
+      if (w <= 768) return { startX: 50, endX: 50, startY: 50, endY: 50, startScale: 0.46, endScale: 0.4 };
+      if (w <= 1024) return { startX: 50, endX: 50, startY: 50, endY: 50, startScale: 0.52, endScale: 0.44 };
+      return { startX: 50, endX: 50, startY: 50, endY: 50, startScale: 0.55, endScale: 0.48 };
+    }
+
     if (w <= 480) return { startX: 50, endX: 50, startScale: 0.78, endScale: 0.68 };
     if (w <= 768) return { startX: 50, endX: 50, startScale: 0.88, endScale: 0.75 };
     if (w <= 1024) return { startX: 55, endX: 50, startScale: 0.78, endScale: 0.55 };
@@ -386,14 +394,13 @@
 
     const progress = Math.min(scrollY / (heroHeight() * 1.2), 1);
     const eased = easeInOutSine(progress);
-    const { startX, endX, startScale, endScale } = getLogoConfig();
+    const { startX, endX, startScale, endScale, startY, endY } = getLogoConfig();
     const currentX = startX + (endX - startX) * eased;
     const currentScale = startScale + (endScale - startScale) * eased;
     const fade = getBaseOpacity() * (1 - eased * 0.2);
 
     logo3d.style.display = '';
     logo3d.style.visibility = 'visible';
-    logo3d.style.top = '';
 
     logoInner.style.marginLeft = '0';
     logoInner.style.marginTop = '0';
@@ -403,12 +410,17 @@
     logoInner.style.opacity = mobile ? '1' : String(fade);
     logo3d.style.opacity = mobile ? '1' : String(fade);
     if (mobile) {
-      logo3d.style.top = '50%';
+      logo3d.style.top = startY != null
+        ? `${startY + (endY - startY) * eased}%`
+        : '50%';
       logo3d.style.left = '50%';
       logo3d.style.transform = 'translateX(-50%)';
     } else {
       logo3d.style.transform = '';
       logo3d.style.left = currentX + '%';
+      logo3d.style.top = startY != null
+        ? `${startY + (endY - startY) * eased}%`
+        : '';
     }
   }
 

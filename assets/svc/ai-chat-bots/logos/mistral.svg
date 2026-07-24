@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 36" fill="none" role="img" aria-label="Mistral">
+  <rect x="10" y="10" width="5" height="16" rx="1" fill="#F97316"/>
+  <rect x="17" y="10" width="5" height="16" rx="1" fill="#F97316" opacity=".75"/>
+  <rect x="24" y="10" width="5" height="16" rx="1" fill="#F97316" opacity=".5"/>
+  <text x="40" y="23" fill="#F5F5F5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600">Mistral</text>
+</svg>
