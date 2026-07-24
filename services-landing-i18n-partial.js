@@ -314,6 +314,60 @@
     "svcLand.viewCases": "Переглянути кейси",
     "svcLand.whyTitle": "Чому Neurowaves",
     },
+    ru: {
+
+      "services.s1title": "AI Chat Bots",
+
+      "services.s3title": "Google Ads & SEO",
+
+      "svcLand.bookConsultation": "Записаться на бесплатную консультацию",
+
+      "svcLand.breadcrumbHome": "Главная",
+
+      "svcLand.breadcrumbServices": "Услуги",
+
+      "svcLand.calendlyDesc": "Выберите удобное время. Мы разберём ваш процесс и следующие шаги.",
+
+      "svcLand.calendlyPlaceholder": "Заглушка Calendly — подключите ссылку для бронирования здесь.",
+
+      "svcLand.calendlyTitle": "Запланировать звонок",
+
+      "svcLand.casesPlaceholder": "Узнайте, как мы внедряли ИИ, CRM и системы роста для реального бизнеса.",
+
+      "svcLand.casesTitle": "Посмотрите на практике",
+
+      "svcLand.contactDesc": "Расскажите о процессе, стеке и целях. Отвечаем в течение одного рабочего дня.",
+
+      "svcLand.contactTitle": "Начать проект",
+
+      "svcLand.exploreService": "Подробнее",
+
+      "svcLand.faqTitle": "FAQ",
+
+      "svcLand.featuresTitle": "Что вы получаете",
+
+      "svcLand.howTitle": "Как это работает",
+
+      "svcLand.industriesTitle": "Отрасли, с которыми работаем",
+
+      "svcLand.problemsTitle": "Проблемы, которые мы решаем",
+
+      "svcLand.relatedTitle": "Связанные услуги",
+
+      "svcLand.startingFrom": "От",
+
+      "svcLand.stickyCta": "Готовы обсудить проект?",
+
+      "svcLand.techTitle": "Технологический стек",
+
+      "svcLand.testimonialsPlaceholder": "Отзывы и метрики из клиентских проектов появятся здесь.",
+
+      "svcLand.testimonialsTitle": "Результаты клиентов",
+
+      "svcLand.viewCases": "Смотреть кейсы",
+
+      "svcLand.whyTitle": "Почему Neurowaves",
+    },
   };
 
   function mergeStrings() {
