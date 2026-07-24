@@ -1,3 +1,11 @@
+
+/* Ensure landing content is visible even if reveal observer misses elements */
+.svc-landing-page .fade-in.visible,
+.svc-landing-page .fade-in {
+  opacity: 1;
+  transform: none;
+}
+
 /* Service landing — full local styles for published svc pages */
 
 .service-img--ads::before {

@@ -682,13 +682,29 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, observerOptions);
 
-document.querySelectorAll(
-  '.service-card, .solution-card, .pain-card, .usecase-card, .integration-card, ' +
-  '.case-card-link, .academy-card, .process-step, .stat-item, .industry-card, .mini-card, .positioning-grid .mini-card, ' +
-  '.contact-team-card'
-).forEach((el) => {
+function revealIfInViewport(el) {
+  const rect = el.getBoundingClientRect();
+  if (rect.top < window.innerHeight - 40 && rect.bottom > 40) {
+    el.classList.add('visible');
+  }
+}
+
+const revealSelectors = [
+  '.service-card', '.solution-card', '.pain-card', '.usecase-card', '.integration-card',
+  '.case-card-link', '.academy-card', '.process-step', '.stat-item', '.industry-card',
+  '.mini-card', '.positioning-grid .mini-card', '.contact-team-card', '.svc-benefit-card',
+  '.svc-step', '.svc-why-card', '.svc-chat-type', '.svc-chat-engine-card', '.svc-chat-audience-card',
+  '.svc-chat-int-visual', '.svc-chat-cap-item', '.svc-chat-why-card', '.fade-in',
+].join(', ');
+
+document.querySelectorAll(revealSelectors).forEach((el) => {
   el.classList.add('fade-in');
   observer.observe(el);
+  revealIfInViewport(el);
+});
+
+window.addEventListener('load', () => {
+  document.querySelectorAll('.fade-in:not(.visible)').forEach(revealIfInViewport);
 });
 
 /* ============ FORM SUBMIT (Web3Forms) ============ */
