@@ -3028,3 +3028,14 @@ img { max-width: 100%; display: block; }
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
+
+/* Single-field form rows should not leave an empty second column */
+.form-row:has(> :only-child) {
+  grid-template-columns: 1fr;
+}
+.faq-list {
+  max-width: 920px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}

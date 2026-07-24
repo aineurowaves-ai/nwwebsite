@@ -312,14 +312,29 @@
   text-align: center;
 }
 .svc-cases-cta .section-desc { margin: 12px auto 20px; max-width: 560px; }
-.svc-faq-list { margin-top: 24px; max-width: 820px; }
+.svc-faq-list {
+  margin-top: 32px;
+  max-width: 920px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.svc-landing-page #faq .section-title {
+  text-align: center;
+}
+.svc-landing-page #faq .faq-question {
+  width: 100%;
+  text-align: left;
+}
 .svc-page--chatbots #faq .section-title {
   text-align: center;
 }
 .svc-page--chatbots .svc-faq-list {
-  max-width: 100%;
+  max-width: 920px;
   width: 100%;
   margin-top: 32px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .svc-chat-contact-section .section-desc {
   max-width: 620px;
@@ -357,6 +372,45 @@
 }
 .svc-chat-contact-section .contact-glass {
   max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  padding: 36px 32px;
+  border-radius: var(--radius-lg);
+}
+.svc-chat-contact-section {
+  text-align: center;
+}
+.svc-chat-contact-section .section-desc {
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 24px;
+}
+.svc-chat-contact-section .contact-form {
+  text-align: left;
+}
+.svc-chat-contact-section .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.svc-chat-contact-section .contact-form textarea {
+  width: 100%;
+}
+.svc-page--growth .svc-chat-price-value {
+  font-size: clamp(1.35rem, 2.6vw, 1.75rem);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  max-width: 18ch;
+}
+@media (max-width: 640px) {
+  .svc-chat-contact-section .form-row {
+    grid-template-columns: 1fr;
+  }
+  .svc-chat-contact-section .contact-glass {
+    padding: 28px 20px;
+  }
 }
 .svc-calendly-inner {
   padding: 36px 32px;
@@ -1480,7 +1534,17 @@
 .ind-auto-card p { font-size: .88rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
 .ind-roi-desc, .ind-tech-desc { margin-top: 12px; max-width: 820px; line-height: 1.75; }
 .ind-cases-cta { padding: 36px 32px; text-align: center; }
-.ind-faq-list { margin-top: 24px; max-width: 820px; }
+.ind-faq-list {
+  margin-top: 32px;
+  max-width: 920px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ind-landing-page #faq .section-title,
+.ind-section #faq .section-title {
+  text-align: center;
+}
 .ind-calendly-inner { padding: 36px 32px; text-align: center; }
 .ind-calendly-placeholder {
   margin-top: 20px; padding: 48px 24px; border-radius: var(--radius);
