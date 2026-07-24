@@ -1,14 +1,30 @@
-/* Service landing pages — partial publish */
+/* Service landing — full local styles for published svc pages */
+
 .service-img--ads::before {
   background:
     linear-gradient(135deg, rgba(18, 16, 42, 0.35) 0%, rgba(10, 10, 16, 0.55) 100%),
     url('assets/service-ads.png') center / cover no-repeat;
 }
-.service-img--seo::before {
-  background:
-    linear-gradient(135deg, rgba(14, 26, 36, 0.35) 0%, rgba(8, 10, 14, 0.55) 100%),
-    url('assets/service-seo.png') center / cover no-repeat;
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--text-dim);
 }
+.breadcrumbs a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.breadcrumbs a:hover { color: var(--accent-light); }
+.breadcrumbs-current { color: var(--text-muted); }
+
+/* ============ SERVICE LANDING PAGES ============ */
 
 .svc-landing-page .hero.page-hero {
   justify-content: center;

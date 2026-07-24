@@ -1,160 +1,7 @@
-/* Partial service landing i18n — AI Chat Bots + Google Ads & SEO only */
+/* Partial service landing i18n — AI Chat Bots + Google Ads & SEO */
 (function () {
   const LANDING = {
     en: {
-    "services.s10b1h": "Traffic grows; inquiries do not",
-    "services.s10b1p": "Blog posts rank for irrelevant terms. Service pages are thin. An SEO agency focus on commercial intent and conversion paths turns rankings into revenue.",
-    "services.s10b2h": "Technical issues block crawling",
-    "services.s10b2p": "Slow pages, broken schema, index bloat — invisible to leadership but costly in rankings. Technical SEO fixes the foundation before content investment.",
-    "services.s10b3h": "Local visibility is inconsistent",
-    "services.s10b3p": "Multi-location or regional B2B needs local SEO — Google Business Profile, location pages, citations, reviews. We align local and national strategy.",
-    "services.s10b4h": "SEO reports ignore sales outcomes",
-    "services.s10b4p": "Keyword positions do not pay salaries. We track organic leads in CRM, connect content to stages, and prioritize pages that produce meetings.",
-    "services.s10badge": "Organic search",
-    "services.s10btn": "Request SEO audit",
-    "services.s10card1": "Technical SEO and site health",
-    "services.s10card2": "Service page and content strategy",
-    "services.s10card3": "Local SEO for multi-location B2B",
-    "services.s10desc": "SEO services that build durable visibility — technical SEO, service page architecture, and local SEO — connected to forms and CRM so organic traffic shows up in pipeline, not just Analytics.",
-    "services.s10faq1a": "Technical improvements can lift performance in weeks. Meaningful ranking gains for competitive service terms typically take 4–9 months. We set expectations by keyword difficulty and domain authority.",
-    "services.s10faq1q": "How long does SEO take to show results for B2B?",
-    "services.s10faq2a": "Yes — outlines, drafts, and edits for service pages, guides, and FAQs. Subject matter experts on your side review for accuracy; we handle structure and optimization.",
-    "services.s10faq2q": "Do you provide content writing?",
-    "services.s10faq3a": "Google Business Profile optimization, location landing pages, NAP consistency, review strategy, and local link building where relevant for your markets.",
-    "services.s10faq3q": "What is included in local SEO?",
-    "services.s10faq4a": "Absolutely. We complement in-house teams with technical execution, content production, or strategy — clear division of responsibilities documented upfront.",
-    "services.s10faq4q": "Can you work with our existing marketing team?",
-    "services.s10feat1": "Technical SEO audits and fixes",
-    "services.s10feat2": "Service and location page optimization",
-    "services.s10feat3": "Content strategy and production",
-    "services.s10feat4": "Local SEO and Google Business Profile",
-    "services.s10feat5": "Schema markup (Organization, Service, FAQ)",
-    "services.s10feat6": "CRM-linked organic lead reporting",
-    "services.s10ind1": "Professional services",
-    "services.s10ind2": "Healthcare & dental groups",
-    "services.s10ind3": "Manufacturing & B2B suppliers",
-    "services.s10ind4": "Legal & accounting firms",
-    "services.s10ind5": "Home services franchises",
-    "services.s10ind6": "Technology consultancies",
-    "services.s10metaDesc": "SEO services for B2B — technical SEO, content architecture, and local SEO that drives qualified inquiries. SEO agency approach tied to CRM and conversion tracking. Request an audit.",
-    "services.s10metaTitle": "SEO Services | SEO Agency for B2B Growth | Neurowaves",
-    "services.s10price": "From $1.5k/mo",
-    "services.s10step1h": "SEO audit and opportunity map",
-    "services.s10step1p": "Technical crawl, competitor gap analysis, and prioritized fix list — quick wins vs strategic content investments.",
-    "services.s10step2h": "On-page and content execution",
-    "services.s10step2p": "Service page optimization, internal linking, schema markup, and content production aligned to buyer questions.",
-    "services.s10step3h": "Monitor, iterate, report",
-    "services.s10step3p": "Monthly ranking and traffic review plus CRM lead attribution. Strategy adjusts based on what generates pipeline.",
-    "services.s10tech": "Screaming Frog, Ahrefs, SEMrush, GA4, Google Search Console, HubSpot, WordPress, Next.js, schema.org",
-    "services.s10title": "SEO Services",
-    "services.s10why1h": "SEO agency with engineering depth",
-    "services.s10why1p": "We fix site speed, JavaScript rendering, and CMS issues — not just meta tags. Technical SEO is done by developers who also build sites.",
-    "services.s10why2h": "Content built for buyers and machines",
-    "services.s10why2p": "Structured pages that rank in Google and surface in AI assistants — hub-and-spoke architecture, FAQ schema, clear entity signals.",
-    "services.s10why3h": "SEO connected to the funnel",
-    "services.s10why3p": "Forms, chatbots, and CRM integration from the same team — organic visitors get the same fast response as paid traffic.",
-    "services.s11b1h": "Prospects ask AI before they Google you",
-    "services.s11b1p": "Buyers prompt ChatGPT for vendor recommendations. If your brand is absent from AI answers, you are not in the shortlist — regardless of traditional rankings.",
-    "services.s11b2h": "Existing SEO does not cover AI search",
-    "services.s11b2p": "Keyword rankings and backlinks alone do not control LLM citations. Generative engine optimization requires quotable facts, clear entities, and authoritative structure.",
-    "services.s11b3h": "Competitors appear in AI summaries",
-    "services.s11b3p": "Rivals with better-structured service pages and FAQ schema get mentioned. AI search optimization closes that gap with content machines can parse and trust.",
-    "services.s11b4h": "No way to measure AI referral traffic",
-    "services.s11b4p": "Dark traffic and zero-click answers obscure impact. We set up tracking proxies, branded search lift monitoring, and citation spot-checks across major AI platforms.",
-    "services.s11badge": "AI search",
-    "services.s11btn": "Audit AI visibility",
-    "services.s11card1": "AI search visibility audit",
-    "services.s11card2": "Content structured for citations",
-    "services.s11card3": "Schema and entity optimization",
-    "services.s11desc": "GEO SEO — generative engine optimization — structures your content so AI search engines cite your brand when prospects ask ChatGPT, Perplexity, or Google AI Overviews who to hire.",
-    "services.s11faq1a": "GEO SEO is the practice of structuring content, schema, and authority signals so large language models and AI search interfaces cite your brand in answers — complementing traditional SEO rather than replacing it.",
-    "services.s11faq1q": "What is generative engine optimization (GEO)?",
-    "services.s11faq2a": "No ethical provider guarantees LLM outputs — models change frequently. We improve structural factors that correlate with citations: clear definitions, authoritative pages, FAQ schema, and consistent entity signals across the web.",
-    "services.s11faq2q": "Can you guarantee mentions in ChatGPT?",
-    "services.s11faq3a": "Traditional SEO targets search engine rankings and clicks. AI search optimization targets being referenced in synthesized answers — requiring denser factual blocks, entity clarity, and monitoring across AI platforms, not just Google SERPs.",
-    "services.s11faq3q": "How is GEO SEO different from regular SEO services?",
-    "services.s11faq4a": "Increasingly yes. Many buyers use both. Strong Google presence helps AI models find trustworthy sources — but page structure tuned for generative engine optimization accelerates citation independently of position #1.",
-    "services.s11faq4q": "Do we need GEO if we already rank on Google?",
-    "services.s11feat1": "Generative engine optimization audits",
-    "services.s11feat2": "AI-quotable content blocks and FAQs",
-    "services.s11feat3": "Entity and schema markup strategy",
-    "services.s11feat4": "Author and expertise signals",
-    "services.s11feat5": "Comparison and definition pages",
-    "services.s11feat6": "Cross-platform citation monitoring",
-    "services.s11ind1": "B2B SaaS & technology",
-    "services.s11ind2": "Consulting & professional services",
-    "services.s11ind3": "Healthcare & specialized clinics",
-    "services.s11ind4": "Legal & compliance services",
-    "services.s11ind5": "Manufacturing & engineering",
-    "services.s11ind6": "Financial services",
-    "services.s11metaDesc": "GEO SEO and generative engine optimization for B2B brands. Get cited in ChatGPT, Perplexity, and Google AI Overviews. AI search optimization tied to your service pages and schema.",
-    "services.s11metaTitle": "GEO SEO | Generative Engine Optimization | AI Search | Neurowaves",
-    "services.s11price": "From $2k/mo",
-    "services.s11step1h": "AI visibility baseline",
-    "services.s11step1p": "We query major LLMs and AI search tools for your category terms, document who gets cited, and gap-analyze against your current content.",
-    "services.s11step2h": "GEO content and schema rollout",
-    "services.s11step2p": "Restructure service pages, add FAQ and HowTo schema, build citation-worthy definition blocks, and strengthen E-E-A-T signals.",
-    "services.s11step3h": "Monitor citations and iterate",
-    "services.s11step3p": "Monthly AI search spot checks, content updates, and integration with traditional SEO and paid campaigns for full-funnel coverage.",
-    "services.s11tech": "Schema.org, Google Search Console, Perplexity, ChatGPT, Claude, Bing Copilot, custom LLM prompt suites, GA4, content CMS",
-    "services.s11title": "GEO SEO",
-    "services.s11why1h": "Early mover in GEO SEO",
-    "services.s11why1p": "We combine traditional SEO execution with generative engine optimization — not agencies that only rename old deliverables.",
-    "services.s11why2h": "Technical + content in one team",
-    "services.s11why2p": "Developers implement schema; strategists write quotable copy. No handoff gaps between \"SEO recommendations\" and what actually ships on site.",
-    "services.s11why3h": "Aligned with paid and CRM",
-    "services.s11why3p": "AI search visibility supports brand demand; Google Ads and chatbots capture it. Neurowaves connects all three.",
-    "services.s12b1h": "Marketing output cannot keep pace with demand",
-    "services.s12b1p": "More channels, more content, same team size. AI marketing automation multiplies production — emails, social, ads, landing variants — with human review on brand and accuracy.",
-    "services.s12b2h": "Campaigns run in disconnected tools",
-    "services.s12b2p": "Ads, email, social, and CRM each tell a different story. We orchestrate marketing automation so triggers, segments, and reporting live in one logic layer.",
-    "services.s12b3h": "Generic AI content hurts brand",
-    "services.s12b3p": "Unedited ChatGPT posts sound alike and erode trust. We use AI for drafts, variants, and personalization — with approval workflows and style guides your team controls.",
-    "services.s12b4h": "Leadership cannot see marketing-to-revenue link",
-    "services.s12b4p": "MQL counts without closed-won attribution waste budget. CRM-connected reporting shows which campaigns and content produce pipeline, not just form fills.",
-    "services.s12badge": "Growth",
-    "services.s12btn": "Plan AI marketing",
-    "services.s12card1": "Marketing automation across channels",
-    "services.s12card2": "AI-assisted content and creatives",
-    "services.s12card3": "CRM-linked campaign reporting",
-    "services.s12desc": "AI marketing that connects content production, campaign automation, and pipeline reporting — an AI marketing agency approach where tools serve strategy, not the other way around.",
-    "services.s12faq1a": "We embed AI into production workflows — content variants, personalization, predictive send times, creative generation — with CRM integration and human oversight. Not generic \"use ChatGPT\" training slides.",
-    "services.s12faq1q": "What does an AI marketing agency do differently?",
-    "services.s12faq2a": "HubSpot, ActiveCampaign, Mailchimp, and custom stacks via n8n or Make. We recommend based on your CRM, team skills, and scale — not partner kickbacks.",
-    "services.s12faq2q": "Which marketing automation platforms do you work with?",
-    "services.s12faq3a": "Low-quality mass content can. Edited, expert-reviewed content with clear structure and E-E-A-T signals performs fine. We never publish raw AI output without human review for B2B brands.",
-    "services.s12faq3q": "Will AI-generated content hurt our SEO?",
-    "services.s12faq4a": "Yes. Common model: your marketer owns strategy and brand; we build automation, produce content volume, and manage paid channels. Clear RACI documented upfront.",
-    "services.s12faq4q": "Can you work alongside our in-house marketer?",
-    "services.s12feat1": "Marketing automation platform setup",
-    "services.s12feat2": "AI-assisted email, social, and ad copy",
-    "services.s12feat3": "Lead nurturing and reactivation sequences",
-    "services.s12feat4": "Segmentation and scoring rules",
-    "services.s12feat5": "Creative production: image and video variants",
-    "services.s12feat6": "Dashboard: spend, MQL, SQL, revenue",
-    "services.s12ind1": "B2B technology & SaaS",
-    "services.s12ind2": "Professional services",
-    "services.s12ind3": "E-commerce & D2B brands",
-    "services.s12ind4": "Healthcare marketing",
-    "services.s12ind5": "Education & training providers",
-    "services.s12ind6": "Franchise networks",
-    "services.s12metaDesc": "AI marketing agency for B2B — marketing automation, AI-generated creatives, campaign orchestration, and CRM-connected reporting. Scale output without scaling headcount.",
-    "services.s12metaTitle": "AI Marketing Services | AI Marketing Agency | Neurowaves",
-    "services.s12price": "From $2k/mo",
-    "services.s12step1h": "Funnel and stack assessment",
-    "services.s12step1p": "We map channels, content cadence, CRM stages, and gaps where automation or AI saves the most hours.",
-    "services.s12step2h": "Build automation and content systems",
-    "services.s12step2p": "Email sequences, social scheduling, ad creative pipelines, and lead scoring rules — with AI assistance where it accelerates, not replaces, judgment.",
-    "services.s12step3h": "Run, measure, refine",
-    "services.s12step3p": "Monthly performance reviews tied to CRM outcomes. Expand what works; cut what only generates noise.",
-    "services.s12tech": "HubSpot, ActiveCampaign, Mailchimp, Meta Ads, Google Ads, Hootsuite, Buffer, OpenAI, Midjourney, Canva API, Looker Studio",
-    "services.s12title": "AI Marketing",
-    "services.s12why1h": "AI marketing agency with delivery teams",
-    "services.s12why1p": "Not just strategy — we implement automation, build landing pages, and wire CRM. Marketing automation that actually runs in production.",
-    "services.s12why2h": "Brand-safe AI workflows",
-    "services.s12why2p": "Approval gates, style guides, and banned phrase lists built into content pipelines. Speed without embarrassing public mistakes.",
-    "services.s12why3h": "Full-stack growth partner",
-    "services.s12why3p": "Combine AI marketing with SEO, Google Ads, and chatbots from one team — one funnel diagram, one accountability.",
     "services.s1aud1h": "Customer-facing bots",
     "services.s1aud1label": "Clients & prospects",
     "services.s1aud1p": "24/7 responses, qualification, booking, order status, and support — on brand, in their language, with escalation to humans when it matters.",
@@ -367,6 +214,8 @@
     "svcLand.calendlyDesc": "Wählen Sie einen passenden Termin. Wir prüfen Ihren Prozess und skizzieren die nächsten Schritte.",
     "svcLand.calendlyPlaceholder": "Calendly-Platzhalter — Buchungslink hier einbinden.",
     "svcLand.calendlyTitle": "Termin vereinbaren",
+    "svcLand.casesPlaceholder": "Erfahren Sie, wie wir KI, CRM und Wachstumssysteme für echte Unternehmen umgesetzt haben.",
+    "svcLand.casesTitle": "In der Praxis",
     "svcLand.contactDesc": "Beschreiben Sie Prozess, Stack und Ziele. Wir antworten innerhalb eines Werktags.",
     "svcLand.contactTitle": "Projekt starten",
     "svcLand.faqTitle": "FAQ",
@@ -378,6 +227,7 @@
     "svcLand.startingFrom": "Ab",
     "svcLand.stickyCta": "Bereit, Ihr Projekt zu besprechen?",
     "svcLand.techTitle": "Technologie-Stack",
+    "svcLand.testimonialsPlaceholder": "Referenzen und Kennzahlen aus Kundenprojekten erscheinen hier.",
     "svcLand.testimonialsTitle": "Kundenergebnisse",
     "svcLand.viewCases": "Fallstudien ansehen",
     "svcLand.whyTitle": "Warum Neurowaves",
@@ -391,6 +241,8 @@
     "svcLand.calendlyDesc": "Choisissez un créneau. Nous examinerons votre processus et les prochaines étapes.",
     "svcLand.calendlyPlaceholder": "Espace Calendly — connectez votre lien de réservation ici.",
     "svcLand.calendlyTitle": "Planifier un appel",
+    "svcLand.casesPlaceholder": "Découvrez comment nous avons déployé IA, CRM et systèmes de croissance pour de vraies entreprises.",
+    "svcLand.casesTitle": "Voir en pratique",
     "svcLand.contactDesc": "Parlez-nous de votre processus, stack et objectifs. Réponse sous un jour ouvré.",
     "svcLand.contactTitle": "Démarrer votre projet",
     "svcLand.faqTitle": "FAQ",
@@ -402,6 +254,7 @@
     "svcLand.startingFrom": "À partir de",
     "svcLand.stickyCta": "Prêt à discuter de votre projet ?",
     "svcLand.techTitle": "Stack technologique",
+    "svcLand.testimonialsPlaceholder": "Témoignages et métriques de projets clients apparaîtront ici.",
     "svcLand.testimonialsTitle": "Résultats clients",
     "svcLand.viewCases": "Voir les études de cas",
     "svcLand.whyTitle": "Pourquoi Neurowaves",
@@ -413,51 +266,58 @@
     "svcLand.breadcrumbHome": "Inicio",
     "svcLand.breadcrumbServices": "Servicios",
     "svcLand.calendlyDesc": "Elija un horario. Revisaremos su proceso y los siguientes pasos.",
-    "svcLand.calendlyPlaceholder": "Espacio Calendly — conecte su enlace de reserva aquí.",
+    "svcLand.calendlyPlaceholder": "Marcador de Calendly — conecte su enlace de reserva aquí.",
     "svcLand.calendlyTitle": "Agendar una llamada",
+    "svcLand.casesPlaceholder": "Explore cómo desplegamos IA, CRM y sistemas de crecimiento para empresas reales.",
+    "svcLand.casesTitle": "Ver en la práctica",
     "svcLand.contactDesc": "Cuéntenos su proceso, stack y objetivos. Respondemos en un día hábil.",
-    "svcLand.contactTitle": "Empiece su proyecto",
+    "svcLand.contactTitle": "Iniciar su proyecto",
     "svcLand.faqTitle": "FAQ",
-    "svcLand.featuresTitle": "Lo que obtiene",
+    "svcLand.featuresTitle": "Qué obtiene",
     "svcLand.howTitle": "Cómo funciona",
-    "svcLand.industriesTitle": "Industrias a las que servimos",
+    "svcLand.industriesTitle": "Industrias que atendemos",
     "svcLand.problemsTitle": "Problemas que resolvemos",
     "svcLand.relatedTitle": "Servicios relacionados",
     "svcLand.startingFrom": "Desde",
     "svcLand.stickyCta": "¿Listo para hablar de su proyecto?",
     "svcLand.techTitle": "Stack tecnológico",
+    "svcLand.testimonialsPlaceholder": "Testimonios y métricas de proyectos aparecerán aquí.",
     "svcLand.testimonialsTitle": "Resultados de clientes",
-    "svcLand.viewCases": "Ver casos de éxito",
+    "svcLand.viewCases": "Ver casos de estudio",
     "svcLand.whyTitle": "Por qué Neurowaves",
     },
     uk: {
     "services.s1title": "AI Chat Bots",
     "services.s3title": "Google Ads & SEO",
-    "svcLand.bookConsultation": "Замовити безкоштовну консультацію",
+    "svcLand.bookConsultation": "Забронювати безкоштовну консультацію",
     "svcLand.breadcrumbHome": "Головна",
     "svcLand.breadcrumbServices": "Послуги",
     "svcLand.calendlyDesc": "Оберіть зручний час. Ми розберемо ваш процес і наступні кроки.",
-    "svcLand.calendlyPlaceholder": "Місце для Calendly — підключіть посилання для бронювання.",
+    "svcLand.calendlyPlaceholder": "Заглушка Calendly — підключіть посилання для бронювання тут.",
     "svcLand.calendlyTitle": "Запланувати дзвінок",
+    "svcLand.casesPlaceholder": "Дізнайтеся, як ми впроваджували ШІ, CRM і системи зростання для реального бізнесу.",
+    "svcLand.casesTitle": "Подивіться на практиці",
     "svcLand.contactDesc": "Розкажіть про процес, стек і цілі. Відповідаємо протягом одного робочого дня.",
-    "svcLand.contactTitle": "Почати проєкт",
+    "svcLand.contactTitle": "Розпочати проєкт",
+    "svcLand.exploreService": "Детальніше",
     "svcLand.faqTitle": "FAQ",
     "svcLand.featuresTitle": "Що ви отримуєте",
     "svcLand.howTitle": "Як це працює",
     "svcLand.industriesTitle": "Галузі, з якими працюємо",
     "svcLand.problemsTitle": "Проблеми, які ми вирішуємо",
-    "svcLand.relatedTitle": "Суміжні послуги",
+    "svcLand.relatedTitle": "Пов'язані послуги",
     "svcLand.startingFrom": "Від",
     "svcLand.stickyCta": "Готові обговорити проєкт?",
     "svcLand.techTitle": "Технологічний стек",
+    "svcLand.testimonialsPlaceholder": "Відгуки та метрики з клієнтських проєктів з'являться тут.",
     "svcLand.testimonialsTitle": "Результати клієнтів",
-    "svcLand.viewCases": "Дивитися кейси",
+    "svcLand.viewCases": "Переглянути кейси",
     "svcLand.whyTitle": "Чому Neurowaves",
     },
   };
 
   function mergeStrings() {
-    if (!window.NW_I18N?.STR) return;
+    if (!window.NW_I18N || !window.NW_I18N.STR) return;
     for (const [lang, map] of Object.entries(LANDING)) {
       if (!window.NW_I18N.STR[lang]) window.NW_I18N.STR[lang] = {};
       Object.assign(window.NW_I18N.STR[lang], map);
@@ -468,20 +328,16 @@
     if (!window.NW_I18N) return;
     lang = lang || window.NW_I18N.getLang();
     const t = (key) => window.NW_I18N.t(lang, key);
-
     document.querySelectorAll('[data-i18n-meta]').forEach((el) => {
-      const key = el.getAttribute('data-i18n-meta');
-      const val = t(key);
+      const val = t(el.getAttribute('data-i18n-meta'));
       if (val) el.setAttribute('content', val);
     });
-
     const titleEl = document.querySelector('title[data-i18n]');
     if (titleEl) {
       const val = t(titleEl.getAttribute('data-i18n'));
       if (val) document.title = val;
     }
-
-    const svcId = document.body?.dataset?.svcId;
+    const svcId = document.body && document.body.dataset ? document.body.dataset.svcId : null;
     if (svcId) {
       const name = t('services.' + svcId + 'title');
       if (name) {
@@ -495,7 +351,7 @@
                 script.textContent = JSON.stringify(data);
               }
             }
-          } catch (_) { /* ignore */ }
+          } catch (e) {}
         });
       }
     }
@@ -509,12 +365,15 @@
     applyServiceMeta(lang);
   }
 
+  // Merge as soon as this file runs (after i18n.js via defer order)
+  mergeStrings();
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', merge);
   } else {
     merge();
   }
   window.addEventListener('nw:lang', (e) => {
-    applyServiceMeta(e.detail?.lang || window.NW_I18N?.getLang());
+    applyServiceMeta((e.detail && e.detail.lang) || window.NW_I18N.getLang());
   });
 })();
