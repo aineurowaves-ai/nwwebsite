@@ -7,5 +7,8 @@ window.NW_CASES = [
   { id: 'c5', slug: 'uasys', img: 'uasys' },
   { id: 'c6', slug: 'favoryt', img: 'favoryt' },
   { id: 'c7', slug: 'gwcua', img: 'gwcua' },
-  { id: 'c8', slug: 'vmv-printing', img: 'vmv' },
+  { id: 'c8', slug: 'vmv-printing', img: 'vmv' },,
+  { id: 'c9', slug: 'dental-google-ads', img: 'dental-ads' },
+  { id: 'c10', slug: 'appliance-google-ads', img: 'appliance-ads' },
+  { id: 'c11', slug: 'logistics-google-ads', img: 'logistics-ads' },
 ];
