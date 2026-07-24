@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 36" fill="none" role="img" aria-label="GA4">
+  <path d="M10 26V12l6 8 6-10 6 16" stroke="#F9AB00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="28" cy="12" r="2.2" fill="#E37400"/>
+  <text x="40" y="23" fill="#F5F5F5" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600">GA4</text>
+</svg>

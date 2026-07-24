@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152 36" fill="none" role="img" aria-label="Pipedrive">
+  <circle cx="18" cy="18" r="9" stroke="#22C55E" stroke-width="1.5"/>
+  <path d="M18 12v6l4 2" stroke="#22C55E" stroke-width="1.6" stroke-linecap="round"/>
+  <text x="40" y="23" fill="#F5F5F5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600">Pipedrive</text>
+</svg>
